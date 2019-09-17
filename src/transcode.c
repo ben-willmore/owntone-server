@@ -399,10 +399,13 @@ stream_find(struct decode_ctx *ctx, unsigned int stream_index)
 static int
 stream_add(struct encode_ctx *ctx, struct stream_ctx *s, enum AVCodecID codec_id)
 {
+  const char *mp3_encoder;
   const AVCodecDescriptor *codec_desc;
-  AVCodec *encoder;
+  AVCodec *encoder = NULL;
   AVDictionary *options = NULL;
   int ret;
+
+  mp3_encoder = cfg_getstr(cfg_getsec(cfg, "streaming"), "mp3_encoder");
 
   codec_desc = avcodec_descriptor_get(codec_id);
   if (!codec_desc)
@@ -411,12 +414,24 @@ stream_add(struct encode_ctx *ctx, struct stream_ctx *s, enum AVCodecID codec_id
       return -1;
     }
 
-  encoder = avcodec_find_encoder(codec_id);
+  if (codec_id == AV_CODEC_ID_MP3 && mp3_encoder)
+    {
+      encoder = avcodec_find_encoder_by_name(mp3_encoder);
+      if (!encoder)
+        DPRINTF(E_LOG, L_XCODE, "Codec '%s' was requested but it is not available\n", mp3_encoder);
+    }
+
+  if (!encoder)
+    encoder = avcodec_find_encoder(codec_id);
+
   if (!encoder)
     {
       DPRINTF(E_LOG, L_XCODE, "Necessary encoder (%s) not found\n", codec_desc->name);
       return -1;
     }
+
+  if (codec_id == AV_CODEC_ID_MP3)
+    DPRINTF(E_LOG, L_XCODE, "Using '%s' for mp3 encoding\n", encoder->name);
 
   CHECK_NULL(L_XCODE, s->stream = avformat_new_stream(ctx->ofmt_ctx, NULL));
   CHECK_NULL(L_XCODE, s->codec = avcodec_alloc_context3(encoder));
@@ -981,10 +996,12 @@ open_filter(struct stream_ctx *out_stream, struct stream_ctx *in_stream)
 {
   const AVFilter *buffersrc;
   const AVFilter *format;
+  const AVFilter *framesize;
   const AVFilter *scale;
   const AVFilter *buffersink;
   AVFilterContext *buffersrc_ctx;
   AVFilterContext *format_ctx;
+  AVFilterContext *framesize_ctx;
   AVFilterContext *scale_ctx;
   AVFilterContext *buffersink_ctx;
   AVFilterGraph *filter_graph;
@@ -997,8 +1014,9 @@ open_filter(struct stream_ctx *out_stream, struct stream_ctx *in_stream)
     {
       buffersrc = avfilter_get_by_name("abuffer");
       format = avfilter_get_by_name("aformat");
+      framesize = avfilter_get_by_name("asetnsamples");
       buffersink = avfilter_get_by_name("abuffersink");
-      if (!buffersrc || !format || !buffersink)
+      if (!buffersrc || !format || !framesize | !buffersink)
 	{
 	  DPRINTF(E_LOG, L_XCODE, "Filtering source, format or sink element not found\n");
 	  goto out_fail;
@@ -1037,18 +1055,46 @@ open_filter(struct stream_ctx *out_stream, struct stream_ctx *in_stream)
       DPRINTF(E_DBG, L_XCODE, "Created 'format' filter: %s\n", args);
 
       ret = avfilter_graph_create_filter(&buffersink_ctx, buffersink, "out", NULL, NULL, filter_graph);
+
       if (ret < 0)
 	{
 	  DPRINTF(E_LOG, L_XCODE, "Cannot create audio buffer sink: %s\n", err2str(ret));
 	  goto out_fail;
 	}
 
-      if ( (ret = avfilter_link(buffersrc_ctx, 0, format_ctx, 0)) < 0 ||
-           (ret = avfilter_link(format_ctx, 0, buffersink_ctx, 0)) < 0 )
-	{
-	  DPRINTF(E_LOG, L_XCODE, "Error connecting audio filters: %s\n", err2str(ret));
-	  goto out_fail;
-	}
+      if (out_stream->codec->codec->capabilities & AV_CODEC_CAP_VARIABLE_FRAME_SIZE)
+        {
+          if ( (ret = avfilter_link(buffersrc_ctx, 0, format_ctx, 0)) < 0 ||
+               (ret = avfilter_link(format_ctx, 0, buffersink_ctx, 0)) < 0 )
+  	    {
+	      DPRINTF(E_LOG, L_XCODE, "Error connecting audio filters: %s\n", err2str(ret));
+	      goto out_fail;
+	    }
+        }
+
+      else
+        {
+          snprintf(args, sizeof(args), "n=%d", out_stream->codec->frame_size);
+
+          ret = avfilter_graph_create_filter(&framesize_ctx, framesize, "asetnsamples", args, NULL, filter_graph);
+          if (ret < 0)
+            {
+               DPRINTF(E_LOG, L_XCODE, "Cannot create audio framesize filter (%s): %s\n", args, err2str(ret));
+               goto out_fail;
+            }
+
+          DPRINTF(E_DBG, L_XCODE, "Created 'framesize' filter: %s\n", args);
+
+        if ( (ret = avfilter_link(buffersrc_ctx, 0, format_ctx, 0)) < 0 ||
+             (ret = avfilter_link(format_ctx, 0, framesize_ctx, 0)) < 0 ||
+             (ret = avfilter_link(framesize_ctx, 0, buffersink_ctx, 0)) < 0 )
+          {
+	    DPRINTF(E_LOG, L_XCODE, "Error connecting audio filters: %s\n", err2str(ret));
+	    goto out_fail;
+	  }
+
+        }
+
     }
   else if (in_stream->codec->codec_type == AVMEDIA_TYPE_VIDEO)
     {
