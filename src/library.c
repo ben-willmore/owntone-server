@@ -378,6 +378,26 @@ fullrescan(void *arg, int *ret)
   return COMMAND_END;
 }
 
+static enum command_state
+fetch_new_music(void *arg, int *ret)
+{
+  char *program;
+  
+  program = cfg_getstr(cfg_getsec(cfg, "library"),"fetch_new_music_program");
+  if (program)
+    {
+      system(program);
+    }
+  scanning = false;
+
+  if (handle_deferred_update_notifications())
+    listener_notify(LISTENER_UPDATE | LISTENER_DATABASE);
+  else
+    listener_notify(LISTENER_UPDATE);
+
+  return COMMAND_END;
+}
+
 /*
  * Callback to notify listeners of database changes
  */
@@ -411,6 +431,20 @@ update_trigger(void *arg, int *retval)
 
 
 /* --------------------------- LIBRARY INTERFACE -------------------------- */
+
+void
+library_fetch_new_music()
+{
+  if (scanning)
+    {
+      DPRINTF(E_INFO, L_LIB, "Scan already running, ignoring request to fetch new music\n");
+      return;
+    }
+
+  scanning = true; // TODO Guard "scanning" with a mutex
+  commands_exec_async(cmdbase, fetch_new_music, NULL);
+}
+
 
 void
 library_rescan()

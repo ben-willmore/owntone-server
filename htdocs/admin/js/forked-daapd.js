@@ -70,6 +70,11 @@ var app = new Vue({
       axios.put('/api/rescan').then(console.log('Library is rescanning meta'));
     },
 
+    fetch_new_music: function() {
+      this.library.updating = true;
+      axios.put('/api/fetch-new-music').then(console.log('Fetching new music'));
+    },
+
     kickoffPairing: function() {
       axios.post('/api/pairing', this.pairing_req).then(response => {
         console.log('Kicked off pairing');
