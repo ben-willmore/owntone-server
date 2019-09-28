@@ -2047,6 +2047,7 @@ playback_start(void *arg, int *retval)
 {
   struct db_queue_item *queue_item = NULL;
   enum command_state cmd_state;
+  unsigned int count;
 
   *retval = -1;
 
