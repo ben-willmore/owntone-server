@@ -12,7 +12,12 @@ export default {
 
   computed: {
     can_skip () {
-      return (this.$store.state.queue.count > 0)
+      const queueLen = this.$store.state.queue.count
+      if (queueLen === 0) {
+        return false
+      }
+      const nowPlaying = this.$store.getters.now_playing
+      return nowPlaying === undefined || nowPlaying.position === undefined ? false : (this.$store.getters.now_playing.position < (queueLen - 1))
     },
     icon_color () {
       return this.can_skip ? 'black' : 'lightgray'
