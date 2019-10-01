@@ -1053,6 +1053,13 @@ jsonapi_reply_meta_rescan(struct httpd_request *hreq)
   return HTTP_NOCONTENT;
 }
 
+static int
+jsonapi_reply_fetch_new_music(struct httpd_request *hreq)
+{
+  library_fetch_new_music();
+  return HTTP_NOCONTENT;
+}
+
 
 /*
  * Endpoint to retrieve information about the spotify integration
@@ -3839,6 +3846,7 @@ static struct httpd_uri_map adm_handlers[] =
     { EVHTTP_REQ_GET |
       EVHTTP_REQ_PUT,    "^/api/update$",                                jsonapi_reply_update },
     { EVHTTP_REQ_PUT,    "^/api/rescan$",                                jsonapi_reply_meta_rescan },
+    { EVHTTP_REQ_PUT,    "^/api/fetch-new-music$",                       jsonapi_reply_fetch_new_music },
     { EVHTTP_REQ_POST,   "^/api/spotify-login$",                         jsonapi_reply_spotify_login },
     { EVHTTP_REQ_GET,    "^/api/spotify$",                               jsonapi_reply_spotify },
     { EVHTTP_REQ_GET,    "^/api/pairing$",                               jsonapi_reply_pairing_get },

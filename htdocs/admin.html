@@ -98,6 +98,7 @@
         <a class="button" v-on:click="update" v-show="!library.updating">Update library</a>
         <p v-show="library.updating">Update in progress ...</p>
         <a class="button" v-on:click="update_meta" v-show="!library.updating">Rescan library</a>
+        <a class="button" v-on:click="fetch_new_music" v-show="!library.updating">Fetch new music</a>
       </div>
     </div>
 

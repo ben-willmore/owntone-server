@@ -110,6 +110,9 @@ library_metarescan();
 void
 library_fullrescan();
 
+void
+library_fetch_new_music();
+
 bool
 library_is_scanning();
 
