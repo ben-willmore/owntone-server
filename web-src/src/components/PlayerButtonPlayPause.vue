@@ -1,6 +1,6 @@
 <template>
   <a v-on:click="toggle_play_pause">
-    <span class="icon"><i class="mdi" v-bind:class="[icon_style, { 'mdi-play': !is_playing, 'mdi-pause': is_playing && is_pause_allowed, 'mdi-stop': is_playing && !is_pause_allowed }]"></i></span>
+    <span class="icon"><i class="mdi" v-bind:class="[icon_style, { 'mdi-music-off': !is_playing && !is_play_allowed, 'mdi-play': !is_playing && is_play_allowed, 'mdi-pause': is_playing && is_pause_allowed, 'mdi-stop': is_playing && !is_pause_allowed }]"></i></span>
   </a>
 </template>
 
@@ -20,6 +20,10 @@ export default {
     is_pause_allowed () {
       return (this.$store.getters.now_playing &&
         this.$store.getters.now_playing.data_kind !== 'pipe')
+    },
+
+    is_play_allowed () {
+      return (this.$store.state.queue.count > 0)
     }
   },
 
@@ -29,7 +33,7 @@ export default {
         webapi.player_pause()
       } else if (this.is_playing && !this.is_pause_allowed) {
         webapi.player_stop()
-      } else {
+      } else if (this.is_play_allowed) {
         webapi.player_play()
       }
     }
