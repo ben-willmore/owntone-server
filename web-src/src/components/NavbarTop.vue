@@ -1,6 +1,9 @@
 <template>
   <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
+      <navbar-item-link to="/radio">
+        <span class="icon"><i class="mdi mdi-radio"></i></span>
+      </navbar-item-link>
       <navbar-item-link to="/playlists">
         <span class="icon"><i class="mdi mdi-library-music"></i></span>
       </navbar-item-link>

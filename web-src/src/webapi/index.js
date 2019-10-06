@@ -283,6 +283,11 @@ export default {
     return axios.get('/api/library/playlists')
   },
 
+  library_radiostations () {
+    return axios.get('/api/library/radiostations')
+  },
+
+
   library_playlist (playlistId) {
     return axios.get('/api/library/playlists/' + playlistId)
   },
