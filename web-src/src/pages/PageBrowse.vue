@@ -2,14 +2,15 @@
   <div>
     <tabs-music></tabs-music>
 
-    <!-- Recently added -->
+    <!-- Recently added albums-->
     <content-with-heading>
+      <!-- Albums -->
       <template slot="heading-left">
-        <p class="title is-4">Recently added</p>
+        <p class="title is-4">Recently added albums</p>
         <p class="heading">albums</p>
       </template>
       <template slot="content">
-        <list-item-album v-for="album in recently_added.items" :key="album.id" :album="album" @click="open_album(album)">
+        <list-item-album v-for="album in recently_added_albums.items" :key="album.id" :album="album" @click="open_album(album)">
           <template slot="actions">
             <a @click="open_album_dialog(album)">
               <span class="icon has-text-dark"><i class="mdi mdi-dots-vertical mdi-18px"></i></span>
@@ -21,20 +22,46 @@
       <template slot="footer">
         <nav class="level">
           <p class="level-item">
-            <a class="button is-light is-small is-rounded" v-on:click="open_browse('recently_added')">Show more</a>
+            <a class="button is-light is-small is-rounded" v-on:click="open_browse('recently_added_albums')">Show more</a>
           </p>
         </nav>
       </template>
     </content-with-heading>
 
-    <!-- Recently played -->
+    <!-- Recently added tracks-->
+    <content-with-heading>
+      <!-- Tracks -->
+      <template slot="heading-left">
+        <p class="title is-4">Recently added tracks</p>
+        <p class="heading">tracks</p>
+      </template>
+      <template slot="content">
+        <list-item-track v-for="track in recently_added_tracks.items" :key="track.id" :track="track" @click="play_track(track)">
+          <template slot="actions">
+            <a @click="open_track_dialog(track)">
+              <span class="icon has-text-dark"><i class="mdi mdi-dots-vertical mdi-18px"></i></span>
+            </a>
+          </template>
+        </list-item-track>
+        <modal-dialog-track :show="show_track_details_modal" :track="selected_track" @close="show_track_details_modal = false" />
+      </template>
+      <template slot="footer">
+        <nav class="level">
+          <p class="level-item">
+            <a class="button is-light is-small is-rounded" v-on:click="open_browse('recently_added_tracks')">Show more</a>
+          </p>
+        </nav>
+      </template>
+    </content-with-heading>
+
+    <!-- Recently played tracks-->
     <content-with-heading>
       <template slot="heading-left">
         <p class="title is-4">Recently played</p>
         <p class="heading">tracks</p>
       </template>
       <template slot="content">
-        <list-item-track v-for="track in recently_played.items" :key="track.id" :track="track" @click="play_track(track)">
+        <list-item-track v-for="track in recently_played_tracks.items" :key="track.id" :track="track" @click="play_track(track)">
           <template slot="actions">
             <a @click="open_track_dialog(track)">
               <span class="icon has-text-dark"><i class="mdi mdi-dots-vertical mdi-18px"></i></span>
@@ -68,13 +95,17 @@ const browseData = {
   load: function (to) {
     return Promise.all([
       webapi.search({ type: 'album', expression: 'time_added after 8 weeks ago and media_kind is music having track_count > 3 order by time_added desc', limit: 3 }),
+      webapi.search({ type: 'track', expression: 'time_added after 8 weeks ago and media_kind is music  order by time_added desc', limit: 3 }),
+      webapi.search({ type: 'album', expression: 'time_played after 8 weeks ago and media_kind is music having track_count > 3 order by time_played desc', limit: 3 }),
       webapi.search({ type: 'track', expression: 'time_played after 8 weeks ago and media_kind is music order by time_played desc', limit: 3 })
     ])
   },
 
   set: function (vm, response) {
-    vm.recently_added = response[0].data.albums
-    vm.recently_played = response[1].data.tracks
+    vm.recently_added_albums = response[0].data.albums
+    vm.recently_added_tracks = response[1].data.tracks
+    vm.recently_played_albums = response[2].data.albums
+    vm.recently_played_tracks = response[3].data.tracks
   }
 }
 
@@ -85,8 +116,10 @@ export default {
 
   data () {
     return {
-      recently_added: {},
-      recently_played: {},
+      recently_added_albums: {},
+      recently_added_tracks: {},
+      recently_played_albums: {},
+      recently_played_tracks: {},
 
       show_track_details_modal: false,
       selected_track: {},

@@ -5,7 +5,8 @@ import * as types from '@/store/mutation_types'
 import PageQueue from '@/pages/PageQueue'
 import PageNowPlaying from '@/pages/PageNowPlaying'
 import PageBrowse from '@/pages/PageBrowse'
-import PageBrowseRecentlyAdded from '@/pages/PageBrowseRecentlyAdded'
+import PageBrowseRecentlyAddedAlbums from '@/pages/PageBrowseRecentlyAddedAlbums'
+import PageBrowseRecentlyAddedTracks from '@/pages/PageBrowseRecentlyAddedTracks'
 import PageBrowseRecentlyPlayed from '@/pages/PageBrowseRecentlyPlayed'
 import PageArtists from '@/pages/PageArtists'
 import PageArtist from '@/pages/PageArtist'
@@ -63,9 +64,15 @@ export const router = new VueRouter({
       meta: { show_progress: true, has_tabs: true }
     },
     {
-      path: '/music/browse/recently_added',
-      name: 'Browse Recently Added',
-      component: PageBrowseRecentlyAdded,
+      path: '/music/browse/recently_added_albums',
+      name: 'Browse Recently Added Albums',
+      component: PageBrowseRecentlyAddedAlbums,
+      meta: { show_progress: true, has_tabs: true }
+    },
+    {
+      path: '/music/browse/recently_added_tracks',
+      name: 'Browse Recently Added Tracks',
+      component: PageBrowseRecentlyAddedTracks,
       meta: { show_progress: true, has_tabs: true }
     },
     {

@@ -4,7 +4,7 @@
 
     <content-with-heading>
       <template slot="heading-left">
-        <p class="title is-4">Recently added</p>
+        <p class="title is-4">Recently added albums</p>
         <p class="heading">albums</p>
       </template>
       <template slot="content">
