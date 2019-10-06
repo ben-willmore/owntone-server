@@ -484,11 +484,14 @@ fetch_album(const char *album_id)
 }
 
 static int
-fetch_playlists(struct query_params *query_params, json_object *items, int *total)
+fetch_playlists(struct query_params *query_params, json_object *items, int *total, bool include_playlists, bool include_radio)
 {
   struct db_playlist_info dbpli;
   json_object *item;
   int ret = 0;
+  bool is_playlist = false;
+
+  *total = 0;
 
   ret = db_query_start(query_params);
   if (ret < 0)
@@ -498,16 +501,22 @@ fetch_playlists(struct query_params *query_params, json_object *items, int *tota
     {
       item = playlist_to_json(&dbpli);
       if (!item)
-	{
-	  ret = -1;
-	  goto error;
-	}
+	      {
+	        ret = -1;
+	        goto error;
+	      }
 
-      json_object_array_add(items, item);
+      is_playlist = strncmp(dbpli.path, default_playlist_directory, strlen(default_playlist_directory))==0;
+
+      if (is_playlist && include_playlists) {
+        json_object_array_add(items, item);
+        *total += 1;
+      }
+      else if (!is_playlist && include_radio) {
+        json_object_array_add(items, item);
+        *total += 1;
+      }
     }
-
-  if (total)
-    *total = query_params->results;
 
  error:
   db_query_end(query_params);
@@ -3099,7 +3108,7 @@ jsonapi_reply_library_tracks_put_byid(struct httpd_request *hreq)
 }
 
 static int
-jsonapi_reply_library_playlists(struct httpd_request *hreq)
+jsonapi_reply_library_playlists(struct httpd_request *hreq, bool include_playlists, bool include_radio)
 {
   time_t db_update;
   struct query_params query_params;
@@ -3127,7 +3136,7 @@ jsonapi_reply_library_playlists(struct httpd_request *hreq)
   query_params.sort = S_PLAYLIST;
   query_params.filter = db_mprintf("(f.type = %d OR f.type = %d)", PL_PLAIN, PL_SMART);
 
-  ret = fetch_playlists(&query_params, items, &total);
+  ret = fetch_playlists(&query_params, items, &total, include_playlists, include_radio);
   free(query_params.filter);
 
   if (ret < 0)
@@ -3148,6 +3157,18 @@ jsonapi_reply_library_playlists(struct httpd_request *hreq)
     return HTTP_INTERNAL;
 
   return HTTP_OK;
+}
+
+static int
+jsonapi_reply_library_playlists_only(struct httpd_request *hreq)
+{
+  return jsonapi_reply_library_playlists(hreq, true, false);
+}
+
+static int
+jsonapi_reply_library_radiostations_only(struct httpd_request *hreq)
+{
+  return jsonapi_reply_library_playlists(hreq, false, true);
 }
 
 static int
@@ -3494,7 +3515,7 @@ jsonapi_reply_library_files(struct httpd_request *hreq)
   query_params.sort = S_VPATH;
   query_params.filter = db_mprintf("(f.directory_id = %d)", directory_id);
 
-  ret = fetch_playlists(&query_params, playlists_items, &total);
+  ret = fetch_playlists(&query_params, playlists_items, &total, true, true);
   free(query_params.filter);
 
   if (ret < 0)
@@ -3726,7 +3747,7 @@ search_playlists(json_object *reply, struct httpd_request *hreq, const char *par
   query_params.sort = S_PLAYLIST;
   query_params.filter = db_mprintf("((f.type = %d OR f.type = %d) AND f.title LIKE '%%%q%%')", PL_PLAIN, PL_SMART, param_query);
 
-  ret = fetch_playlists(&query_params, items, &total);
+  ret = fetch_playlists(&query_params, items, &total, true, true);
   if (ret < 0)
     goto out;
 
@@ -3883,7 +3904,8 @@ static struct httpd_uri_map adm_handlers[] =
     { EVHTTP_REQ_DELETE, "^/api/queue/items/[[:digit:]]+$",              jsonapi_reply_queue_tracks_delete },
     { EVHTTP_REQ_POST,   "^/api/queue/save$",                            jsonapi_reply_queue_save},
 
-    { EVHTTP_REQ_GET,    "^/api/library/playlists$",                     jsonapi_reply_library_playlists },
+    { EVHTTP_REQ_GET,    "^/api/library/playlists$",                     jsonapi_reply_library_playlists_only },
+    { EVHTTP_REQ_GET,    "^/api/library/radiostations$",                 jsonapi_reply_library_radiostations_only },
     { EVHTTP_REQ_GET,    "^/api/library/playlists/[[:digit:]]+$",        jsonapi_reply_library_playlist },
     { EVHTTP_REQ_GET,    "^/api/library/playlists/[[:digit:]]+/tracks$", jsonapi_reply_library_playlist_tracks },
 //    { EVHTTP_REQ_POST,   "^/api/library/playlists/[[:digit:]]+/tracks$", jsonapi_reply_library_playlists_tracks },
