@@ -96,7 +96,6 @@ const browseData = {
     return Promise.all([
       webapi.search({ type: 'album', expression: 'time_added after 8 weeks ago and media_kind is music having track_count > 3 order by time_added desc', limit: 3 }),
       webapi.search({ type: 'track', expression: 'time_added after 8 weeks ago and media_kind is music  order by time_added desc', limit: 3 }),
-      webapi.search({ type: 'album', expression: 'time_played after 8 weeks ago and media_kind is music having track_count > 3 order by time_played desc', limit: 3 }),
       webapi.search({ type: 'track', expression: 'time_played after 8 weeks ago and media_kind is music order by time_played desc', limit: 3 })
     ])
   },
@@ -104,8 +103,7 @@ const browseData = {
   set: function (vm, response) {
     vm.recently_added_albums = response[0].data.albums
     vm.recently_added_tracks = response[1].data.tracks
-    vm.recently_played_albums = response[2].data.albums
-    vm.recently_played_tracks = response[3].data.tracks
+    vm.recently_played_tracks = response[2].data.tracks
   }
 }
 
