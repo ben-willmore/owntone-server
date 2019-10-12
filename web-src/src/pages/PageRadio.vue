@@ -51,7 +51,7 @@ export default {
 
   methods: {
     open_playlist: function (playlist) {
-      this.$router.push({ path: '/radio/' + playlist.id })
+      webapi.player_play_uri(playlist.uri, true)
     },
 
     open_dialog: function (playlist) {
