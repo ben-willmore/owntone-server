@@ -217,6 +217,8 @@ struct player_session
   // Equals current number of samples written to outputs
   uint32_t pos;
 
+  uint32_t lastpos_ms;
+
   // The player sources also have a quality property, but in some situations
   // they may get cleared. So we also save it here.
   struct media_quality quality;
@@ -1093,6 +1095,12 @@ playback_cb(int fd, short what, void *arg)
   int i;
   int ret;
 
+  if ((pb_session.lastpos_ms < 3000) != (pb_session.playing_now->pos_ms < 3000)) {
+    DPRINTF(E_LOG, L_PLAYER, "Playtime crossed 3sec boundary\n");
+    listener_notify(LISTENER_PLAYER);
+  }
+  pb_session.lastpos_ms = pb_session.playing_now->pos_ms;
+
   // Check if we missed any timer expirations
   overrun = 0;
 #ifdef HAVE_TIMERFD
@@ -1884,6 +1892,8 @@ static enum command_state
 playback_start_bh(void *arg, int *retval)
 {
   int ret;
+
+  pb_session.lastpos_ms = 0;
 
   ret = pb_timer_start();
   if (ret < 0)

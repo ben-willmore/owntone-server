@@ -12,6 +12,9 @@ export default {
 
   computed: {
     can_skip () {
+      if (this.$store.state.player.item_progress_ms > 3000) {
+        return true
+      }
       const queueLen = this.$store.state.queue.count
       if (queueLen === 0) {
         return false
