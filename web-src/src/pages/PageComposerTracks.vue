@@ -1,9 +1,6 @@
 <template>
   <div>
     <content-with-heading>
-      <template #options>
-        <index-button-list :index="index_list" />
-      </template>
       <template #heading-left>
         <p class="title is-4">
           {{ composer }}

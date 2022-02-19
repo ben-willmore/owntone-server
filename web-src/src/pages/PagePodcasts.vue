@@ -64,7 +64,7 @@
       </template>
       <template #content>
         <list-albums
-          :albums="albums.items"
+          :albums="albums"
           @play-count-changed="reload_new_episodes()"
           @podcast-deleted="reload_podcasts()"
         />
@@ -87,6 +87,7 @@ import ModalDialogAddRss from '@/components/ModalDialogAddRss.vue'
 import ProgressBar from '@/components/ProgressBar.vue'
 import * as types from '@/store/mutation_types'
 import webapi from '@/webapi'
+import { GroupByList } from '@/lib/GroupByList'
 
 const dataObject = {
   load: function (to) {
@@ -97,7 +98,7 @@ const dataObject = {
   },
 
   set: function (vm, response) {
-    vm.albums = response[0].data
+    vm.albums = new GroupByList(response[0].data)
     vm.new_episodes = response[1].data.tracks
   }
 }
@@ -118,6 +119,7 @@ export default {
       next((vm) => dataObject.set(vm, response))
     })
   },
+
   beforeRouteUpdate(to, from, next) {
     const vm = this
     dataObject.load(to).then((response) => {
@@ -128,7 +130,7 @@ export default {
 
   data() {
     return {
-      albums: { items: [] },
+      albums: [],
       new_episodes: { items: [] },
 
       show_url_modal: false,
@@ -173,7 +175,7 @@ export default {
 
     reload_podcasts: function () {
       webapi.library_albums('podcast').then(({ data }) => {
-        this.albums = data
+        this.albums = new GroupByList(data)
         this.reload_new_episodes()
       })
     },
