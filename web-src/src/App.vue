@@ -191,7 +191,7 @@ export default {
         /* 
         vm.$store.dispatch('add_notification', {
           text: 'Connection to server established',
-          type: 'primary',
+          type: 'green',
           topic: 'connection',
           timeout: 2000
         })
