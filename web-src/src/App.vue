@@ -97,7 +97,7 @@ export default {
 
   methods: {
     connect: function () {
-      this.$store.dispatch('add_notification', { text: 'Connecting to OwnTone server', type: 'info', topic: 'connection', timeout: 2000 })
+      this.$store.dispatch('add_notification', { text: 'Connecting...', type: 'info', topic: 'connection', timeout: 1000 })
 
       webapi.config().then(({ data }) => {
         this.$store.commit(types.UPDATE_CONFIG, data)
@@ -107,7 +107,7 @@ export default {
         this.open_ws()
         this.$Progress.finish()
       }).catch(() => {
-        this.$store.dispatch('add_notification', { text: 'Failed to connect to OwnTone server', type: 'danger', topic: 'connection' })
+        this.$store.dispatch('add_notification', { text: 'Failed to connect', type: 'danger', topic: 'connection' })
       })
     },
 
@@ -137,7 +137,7 @@ export default {
       )
 
       socket.onopen = function () {
-        vm.$store.dispatch('add_notification', { text: 'Connection to server established', type: 'primary', topic: 'connection', timeout: 2000 })
+        vm.$store.dispatch('add_notification', { text: 'Connected', type: 'primary', topic: 'connection', timeout: 1000 })
         vm.reconnect_attempts = 0
         socket.send(JSON.stringify({ notify: ['update', 'database', 'player', 'options', 'outputs', 'volume', 'queue', 'spotify', 'lastfm', 'pairing'] }))
 
@@ -154,8 +154,7 @@ export default {
         // vm.$store.dispatch('add_notification', { text: 'Connection closed', type: 'danger', timeout: 2000 })
       }
       socket.onerror = function () {
-        vm.reconnect_attempts++
-        vm.$store.dispatch('add_notification', { text: 'Connection lost. Reconnecting ... (' + vm.reconnect_attempts + ')', type: 'danger', topic: 'connection' })
+        vm.$store.dispatch('add_notification', { text: 'Reconnecting...', type: 'info', topic: 'connection' })
       }
       socket.onmessage = function (response) {
         const data = JSON.parse(response.data)
