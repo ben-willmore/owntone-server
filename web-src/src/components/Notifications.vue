@@ -38,12 +38,14 @@ export default {
 
 <style>
 .fd-notifications {
+  display: none;
   position: fixed;
   bottom: 60px;
   z-index: 20000;
   width: 100%;
 }
 .fd-notifications .notification {
+  display: none;
   margin-bottom: 10px;
   margin-left: 24px;
   margin-right: 24px;
