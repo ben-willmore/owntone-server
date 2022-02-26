@@ -72,6 +72,8 @@ export default {
     moment.locale(navigator.language)
     this.connect()
 
+    window.addEventListener(focus, () => this.connect())
+
     //  Start the progress bar on app start
     this.$Progress.start()
 
