@@ -51,6 +51,8 @@ export default new Vuex.Store({
       next_id: 1,
       list: []
     },
+
+    search_path: '/search/library',
     recent_searches: [],
 
     hide_singles: false,
