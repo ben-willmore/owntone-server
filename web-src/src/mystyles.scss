@@ -322,7 +322,7 @@ hr.fd-navbar-divider {
     background-color:rgb(10, 10, 10);
   }
   .navbar-item {
-    background-color:rgb(0,0,0) !important;
+    background-color:rgb(10, 10, 10) !important;
   }
   .navbar-item.is-active {
     color:rgb(20,20,20) !important;
@@ -360,5 +360,20 @@ hr.fd-navbar-divider {
   }
   .navbar-link {
       background-color: rgb(10, 10, 10) !important;  
+  }
+  .navbar-menu {
+      background-color: rgb(255, 10, 10) !important;
+  }
+  .navbar-menu.is-active {
+      background-color: rgb(10, 10, 10) !important;
+  }
+  .navbar-menu.is-active:hover {
+      background-color: rgb(10, 10, 10) !important;
+  }
+  .navbar-dropdown {
+      background-color: rgb(10, 10, 10) !important;
+  }
+  .navbar-dropdown:hover {
+      background-color: rgb(10, 10, 10) !important;
   }
 }
