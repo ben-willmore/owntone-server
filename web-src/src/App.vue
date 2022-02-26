@@ -99,7 +99,8 @@ export default {
 
   methods: {
     connect: function () {
-      this.$store.dispatch('add_notification', { text: 'Connecting...', type: 'info', topic: 'connection', timeout: 1000 })
+      // this.$store.dispatch('add_notification', { text: 'Connecting...', type: 'info', topic: 'connection', timeout: 1000 })
+      this.$store.state.socket_connected = false
 
       webapi.config().then(({ data }) => {
         this.$store.commit(types.UPDATE_CONFIG, data)
@@ -110,12 +111,14 @@ export default {
         this.$Progress.finish()
       }).catch(() => {
         this.$store.dispatch('add_notification', { text: 'Failed to connect', type: 'danger', topic: 'connection' })
+        this.$store.state.socket_connected = false
       })
     },
 
     open_ws: function () {
       if (this.$store.state.config.websocket_port <= 0) {
         this.$store.dispatch('add_notification', { text: 'Missing websocket port', type: 'danger' })
+        this.$store.state.socket_connected = false
         return
       }
 
@@ -139,7 +142,8 @@ export default {
       )
 
       socket.onopen = function () {
-        vm.$store.dispatch('add_notification', { text: 'Connected', type: 'success', topic: 'connection', timeout: 1000 })
+        // vm.$store.dispatch('add_notification', { text: 'Connected', type: 'success', topic: 'connection', timeout: 1000 })
+        vm.$store.state.socket_connected = true
         vm.reconnect_attempts = 0
         socket.send(JSON.stringify({ notify: ['update', 'database', 'player', 'options', 'outputs', 'volume', 'queue', 'spotify', 'lastfm', 'pairing'] }))
 
@@ -154,9 +158,11 @@ export default {
       }
       socket.onclose = function () {
         // vm.$store.dispatch('add_notification', { text: 'Connection closed', type: 'danger', timeout: 2000 })
+        vm.$store.state.socket_connected = false
       }
       socket.onerror = function () {
-        vm.$store.dispatch('add_notification', { text: 'Reconnecting...', type: 'info', topic: 'connection' })
+        // vm.$store.dispatch('add_notification', { text: 'Reconnecting...', type: 'info', topic: 'connection' })
+        vm.$store.state.socket_connected = false
       }
       socket.onmessage = function (response) {
         const data = JSON.parse(response.data)

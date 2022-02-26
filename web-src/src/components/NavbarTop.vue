@@ -22,6 +22,12 @@
       <navbar-item-link to="/search" v-if="is_visible_search">
         <span class="icon"><i class="mdi mdi-magnify"></i></span>
       </navbar-item-link>
+      <div class="foobar" v-if="!this.$store.state.socket_connected">
+        <span class="icon"><i class="mdi mdi-refresh"></i></span>
+      </div>
+      <!--div class="foobar" v-if="this.$store.state.socket_connected">
+        <span class="icon"><i class="mdi mdi-lan-connect"></i></span>
+      </div-->
 
       <div class="navbar-burger" @click="show_burger_menu = !show_burger_menu" :class="{ 'is-active': show_burger_menu }">
         <span></span>
