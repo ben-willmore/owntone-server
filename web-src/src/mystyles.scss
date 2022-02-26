@@ -313,22 +313,26 @@ hr.fd-navbar-divider {
     color:white;
   }
   .fd-tabs-section {
-    background-color:rgba(20, 20, 20);
+    background-color:rgb(20, 20, 20);
   }
   .navbar.is-light {
-    background-color:rgba(10, 10, 10);
+    background-color:rgb(10, 10, 10);
   }
   .navbar-brand {
-    background-color:rgba(10, 10, 10);
+    background-color:rgb(10, 10, 10);
+  }
+  .navbar-item {
+    background-color:rgb(0,0,0) !important;
   }
   .navbar-item.is-active {
+    color:rgb(20,20,20) !important;
     background-color:$blue !important;
   }
   .navbar-item:hover {
-    background-color:rgba(60, 60, 60) !important;
+    background-color:rgb(60, 60, 60, 1) !important;
   }
   .has-text-dark {
-    color:rgba(200,200,200) !important;
+    color:rgb(200,200,200) !important;
   }
   .range-slider-fill {
     background-color: hsl(0, 0%, 79%);
@@ -340,6 +344,21 @@ hr.fd-navbar-divider {
     background-color: hsl(0, 0%, 4%);
   }
   .button.is-white {
-    background-color: rgba(10, 10, 10);
+    background-color: rgb(10, 10, 10);
+  }
+  .button.is-white:hover {
+    background-color: rgb(60, 60, 60);
+  }
+  .navbar-burger {
+      color: rgb(255, 255, 255) !important;
+  }
+  .navbar-burger:hover {
+      background-color: rgb(60, 60, 60) !important;
+  }
+  .navbar-burger.is-active {
+      background-color: $blue !important;
+  }
+  .navbar-link {
+      background-color: rgb(10, 10, 10) !important;  
   }
 }
