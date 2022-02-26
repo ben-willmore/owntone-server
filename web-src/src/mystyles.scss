@@ -324,6 +324,9 @@ hr.fd-navbar-divider {
   .navbar-item.is-active {
     background-color:$blue !important;
   }
+  .navbar-item:hover {
+    background-color:rgba(60, 60, 60) !important;
+  }
   .has-text-dark {
     color:rgba(200,200,200) !important;
   }
@@ -334,6 +337,9 @@ hr.fd-navbar-divider {
     background-color: hsl(0, 0%, 0%);
   }
   .dropdown-item:hover {
-    background-color: hsl(0, 0%, 4%)
+    background-color: hsl(0, 0%, 4%);
+  }
+  .button.is-white {
+    background-color: rgba(10, 10, 10);
   }
 }
