@@ -15,6 +15,9 @@
                     type="text"
                     placeholder="Search"
                     autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
                   />
                   <span class="icon is-left">
                     <i class="mdi mdi-magnify" />
