@@ -9,6 +9,7 @@ $primary:#485fc7;
   min-width: 250px;
   width: 100%;
 }
+
 .range-slider-fill {
   background-color: hsl(0, 0%, 21%);
 }
@@ -305,4 +306,34 @@ hr.fd-navbar-divider {
 
 .hero-body {
   padding: 1.5rem !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdi {
+    color:white;
+  }
+  .fd-tabs-section {
+    background-color:rgba(20, 20, 20);
+  }
+  .navbar.is-light {
+    background-color:rgba(10, 10, 10);
+  }
+  .navbar-brand {
+    background-color:rgba(10, 10, 10);
+  }
+  .navbar-item.is-active {
+    background-color:$blue !important;
+  }
+  .has-text-dark {
+    color:rgba(200,200,200) !important;
+  }
+  .range-slider-fill {
+    background-color: hsl(0, 0%, 79%);
+  }
+  .track-progress .range-slider-rail {
+    background-color: hsl(0, 0%, 0%);
+  }
+  .dropdown-item:hover {
+    background-color: hsl(0, 0%, 4%)
+  }
 }
