@@ -120,12 +120,15 @@ export default {
 
   methods: {
     connect: function () {
+      /*
       this.$store.dispatch('add_notification', {
         text: 'Connecting to OwnTone server',
         type: 'info',
         topic: 'connection',
         timeout: 2000
       })
+      */
+      this.$store.state.socket_connected = false
 
       webapi
         .config()
@@ -133,25 +136,30 @@ export default {
           this.$store.commit(types.UPDATE_CONFIG, data)
           this.$store.commit(types.HIDE_SINGLES, data.hide_singles)
           document.title = data.library_name
-
           this.open_ws()
           this.$Progress.finish()
         })
         .catch(() => {
+          /*
           this.$store.dispatch('add_notification', {
             text: 'Failed to connect to OwnTone server',
             type: 'danger',
             topic: 'connection'
           })
+          */
+          this.$store.state.socket_connected = false
         })
     },
 
     open_ws: function () {
       if (this.$store.state.config.websocket_port <= 0) {
+        /*
         this.$store.dispatch('add_notification', {
           text: 'Missing websocket port',
           type: 'danger'
         })
+        */
+        this.$store.state.socket_connected = false
         return
       }
 
@@ -180,12 +188,15 @@ export default {
       })
 
       socket.onopen = function () {
+        /* 
         vm.$store.dispatch('add_notification', {
           text: 'Connection to server established',
           type: 'primary',
           topic: 'connection',
           timeout: 2000
         })
+        */
+        vm.$store.state.socket_connected = true
         vm.reconnect_attempts = 0
         socket.send(
           JSON.stringify({
@@ -215,15 +226,19 @@ export default {
       }
       socket.onclose = function () {
         // vm.$store.dispatch('add_notification', { text: 'Connection closed', type: 'danger', timeout: 2000 })
+        vm.$store.state.socket_connected = false
       }
       socket.onerror = function () {
         vm.reconnect_attempts++
+        /*
         vm.$store.dispatch('add_notification', {
           text:
             'Connection lost. Reconnecting ... (' + vm.reconnect_attempts + ')',
           type: 'danger',
           topic: 'connection'
         })
+        */
+        vm.$store.state.socket_connected = false
       }
       socket.onmessage = function (response) {
         const data = JSON.parse(response.data)

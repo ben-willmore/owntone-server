@@ -50,6 +50,8 @@ export default createStore({
         list: []
       },
 
+      socket_connected: false,
+
       search_path: '/search/library',
       recent_searches: [],
 
