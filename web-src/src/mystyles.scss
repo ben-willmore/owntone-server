@@ -421,6 +421,12 @@ hr.fd-navbar-divider {
     --slider-connect-bg: rgb(255,255,255) !important;
     --slider-tooltip-bg: rgb(255,255,255) !important;
   }
+  div.modal-background {
+    background-color: rgba(30,30,30,.75) !important;  
+  }
+  .navbar.is-dark {
+     background-color: rgb(0,0,0) !important;
+  }
 }
 
 .fd-navbar-icon {
