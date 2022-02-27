@@ -2,6 +2,7 @@
 
 @import 'bulma/bulma.sass';
 @import 'bulma-switch';
+@import 'bulma-prefers-dark';
 
 /* Volume slider */
 .slider {
@@ -314,4 +315,34 @@ hr.fd-navbar-divider {
 
 .hero-body {
   padding: 1.5rem !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* navbar icons and active airplay icons */
+  span.icon {
+    color: white;
+  }
+  /* inactive airplay icons */
+  .icon.has-text-grey-light {
+    color: rgb(100,100,100) !important;
+  }
+  .mdi-dots-vertical {
+    color: rgb(200,200,200) !important;
+  }
+  .fd-tabs-section {
+    background-color: rgb(20, 20, 20);
+  }
+  .card-footer-item.has-text-dark {
+    color: #c8c8c8 !important;
+  }
+  .card-footer-item.has-text-dark:hover {
+    color: #c8c8c8 !important;
+  }
+  .slider-base {
+    background-color: rgb(100,100,100) !important;
+  }
+  .slider {
+    --slider-connect-bg: rgb(255,255,255) !important;
+    --slider-tooltip-bg: rgb(255,255,255) !important;
+  }
 }
