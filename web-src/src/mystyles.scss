@@ -414,6 +414,13 @@ hr.fd-navbar-divider {
   .hero.is-light .title {
     color: rgb(255, 255, 255) !important;
   }
+  .slider-base {
+    background-color: rgb(100,100,100) !important;
+  }
+  .slider {
+    --slider-connect-bg: rgb(255,255,255) !important;
+    --slider-tooltip-bg: rgb(255,255,255) !important;
+  }
 }
 
 .fd-navbar-icon {
