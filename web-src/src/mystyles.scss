@@ -304,14 +304,16 @@ hr.fd-navbar-divider {
   position: fixed;
 }
 
-.hero-body {
-  padding: 1.5rem !important;
-}
-
 @media (prefers-color-scheme: dark) {
-  .mdi {
+  /* navbar icons and active airplay icons */
+  span.icon:not(.has-text-grey-light) {
     color:white;
   }
+  /* inactive airplay icons */
+  .icon.has-text-grey-light {
+    color: rgb(100,100,100) !important;
+  }
+
   .fd-tabs-section {
     background-color:rgb(20, 20, 20);
   }
@@ -328,11 +330,14 @@ hr.fd-navbar-divider {
     color:rgb(20,20,20) !important;
     background-color:$blue !important;
   }
-  .navbar-item:hover {
-    background-color:rgb(60, 60, 60, 1) !important;
+  .navbar-brand>.navbar-item:hover {
+    background-color:rgb(60, 60, 60) !important;
   }
   .has-text-dark {
     color:rgb(200,200,200) !important;
+  }
+  .has-text-grey-light {
+    color:rgb(100,100,100) !important;
   }
   .range-slider-fill {
     background-color: hsl(0, 0%, 79%);
@@ -343,37 +348,67 @@ hr.fd-navbar-divider {
   .dropdown-item:hover {
     background-color: hsl(0, 0%, 4%);
   }
+  .button.is-light {
+    background-color: rgb(30, 30, 30);
+  }
+  .button.is-light:hover {
+    background-color: rgb(60, 60, 60);
+  }
   .button.is-white {
     background-color: rgb(10, 10, 10);
   }
   .button.is-white:hover {
     background-color: rgb(60, 60, 60);
   }
+  .button.is-dark:hover {
+    background-color: rgb(60, 60, 60);
+  }
   .navbar-burger {
-      color: rgb(255, 255, 255) !important;
+    color: rgb(255, 255, 255) !important;
   }
   .navbar-burger:hover {
-      background-color: rgb(60, 60, 60) !important;
+    background-color: rgb(60, 60, 60) !important;
   }
   .navbar-burger.is-active {
-      background-color: $blue !important;
+    background-color: $blue !important;
   }
   .navbar-link {
-      background-color: rgb(10, 10, 10) !important;  
+    background-color: rgb(10, 10, 10) !important;
   }
   .navbar-menu {
-      background-color: rgb(10, 10, 10) !important;
+    background-color: rgb(10, 10, 10) !important;
   }
   .navbar-menu.is-active {
-      background-color: rgb(10, 10, 10) !important;
+    background-color: rgb(10, 10, 10) !important;
   }
   .navbar-menu.is-active:hover {
-      background-color: rgb(10, 10, 10) !important;
+    background-color: rgb(10, 10, 10) !important;
   }
   .navbar-dropdown {
-      background-color: rgb(10, 10, 10) !important;
+    background-color: rgb(10, 10, 10) !important;
   }
   .navbar-dropdown:hover {
-      background-color: rgb(10, 10, 10) !important;
+    background-color: rgb(10, 10, 10) !important;
   }
+  .card-footer-item.has-text-dark:hover {
+    color:#c8c8c8 !important;
+  }
+  .hero-body {
+    background-color: rgb(20, 20, 20) !important;
+  }
+  .hero.is-light .title {
+    color: rgb(255, 255, 255) !important;
+  }
+  /* volume sliders */
+  .navbar-item:hover {
+    background-color: rgb(255, 0, 0);
+  }
+}
+
+.foobar {
+  width: 55px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
 }
