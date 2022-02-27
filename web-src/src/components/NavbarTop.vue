@@ -27,7 +27,7 @@
       <navbar-item-link v-if="is_visible_search" to="/search">
         <span class="icon"><i class="mdi mdi-magnify" /></span>
       </navbar-item-link>
-      <div class="fd-navbar-icon" v-if="this.$store.state.socket_connected">
+      <div class="fd-navbar-icon" v-if="!this.$store.state.socket_connected">
         <span class="icon"><i class="mdi mdi-lan-disconnect"></i></span>
       </div>
 
