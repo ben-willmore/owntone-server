@@ -49,6 +49,9 @@ export default createStore({
         next_id: 1,
         list: []
       },
+
+      socket_connected: false,
+
       recent_searches: [],
 
       hide_singles: false,
