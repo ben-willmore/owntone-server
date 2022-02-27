@@ -358,3 +358,8 @@ hr.fd-navbar-divider {
   display: flex;
   justify-content: center;
 }
+
+.navbar.is-dark .navbar-brand>.navbar-item, .navbar.is-dark .navbar-brand .navbar-link
+{
+  min-height: 5rem;
+}
