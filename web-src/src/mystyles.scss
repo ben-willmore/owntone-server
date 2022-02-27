@@ -41,7 +41,6 @@ $primary:#485fc7;
 }
 
 .progress-bar {
-  background-color: $blue;
   border-radius: 9999px;
   height: 4px;
 }
@@ -321,98 +320,25 @@ hr.fd-navbar-divider {
 
 @media (prefers-color-scheme: dark) {
   /* navbar icons and active airplay icons */
-  span.icon:not(.has-text-grey-light) {
-    color:white;
+  span.icon {
+    color: white;
   }
   /* inactive airplay icons */
   .icon.has-text-grey-light {
     color: rgb(100,100,100) !important;
   }
+  .mdi-dots-vertical {
+    color: rgb(200,200,200) !important;
+  }
 
   .fd-tabs-section {
-    background-color:rgb(20, 20, 20);
+    background-color: rgb(20, 20, 20);
   }
-  .navbar.is-light {
-    background-color:rgb(10, 10, 10);
-  }
-  .navbar-brand {
-    background-color:rgb(10, 10, 10);
-  }
-  .navbar-item {
-    background-color:rgb(10, 10, 10) !important;
-  }
-  .navbar-item.is-active {
-    color:rgb(20,20,20) !important;
-    background-color:$blue !important;
-  }
-  .navbar-brand>.navbar-item:hover {
-    background-color:rgb(60, 60, 60) !important;
-  }
-  .has-text-dark {
-    color:rgb(200,200,200) !important;
-  }
-  .has-text-grey-light {
-    color:rgb(100,100,100) !important;
-  }
-  .range-slider-fill {
-    background-color: hsl(0, 0%, 79%);
-  }
-  .track-progress .range-slider-rail {
-    background-color: hsl(0, 0%, 0%);
-  }
-  .dropdown-item:hover {
-    background-color: hsl(0, 0%, 4%);
-  }
-  .button.is-light {
-    background-color: rgb(30, 30, 30);
-  }
-  .button.is-light:hover {
-    background-color: rgb(60, 60, 60);
-  }
-  .button.is-white {
-    background-color: rgb(10, 10, 10);
-  }
-  .button.is-white:hover {
-    background-color: rgb(60, 60, 60);
-  }
-  .button.is-dark:hover {
-    background-color: rgb(60, 60, 60);
-  }
-  .navbar-burger {
-    color: rgb(255, 255, 255) !important;
-  }
-  .navbar-burger:hover {
-    background-color: rgb(60, 60, 60) !important;
-  }
-  .navbar-burger.is-active {
-    background-color: $blue !important;
-  }
-  .navbar-link {
-    background-color: rgb(10, 10, 10) !important;
-  }
-  .navbar-menu {
-    background-color: rgb(10, 10, 10) !important;
-  }
-  .navbar-menu.is-active {
-    background-color: rgb(10, 10, 10) !important;
-  }
-  .navbar-menu.is-active:hover {
-    background-color: rgb(10, 10, 10) !important;
-  }
-  .navbar-dropdown {
-    background-color: rgb(10, 10, 10) !important;
-  }
-  .navbar-dropdown:hover {
-    background-color: rgb(10, 10, 10) !important;
+  .card-footer-item.has-text-dark {
+    color: #c8c8c8 !important;
   }
   .card-footer-item.has-text-dark:hover {
-    color:#c8c8c8 !important;
-  }
-  .hero-body {
-    background-color: rgb(20, 20, 20) !important;
-  }
-  .hero.is-light .title {
-    color: rgb(255, 255, 255) !important;
+    color: #c8c8c8 !important;
   }
   .slider-base {
     background-color: rgb(100,100,100) !important;
@@ -423,9 +349,6 @@ hr.fd-navbar-divider {
   }
   div.modal-background {
     background-color: rgba(30,30,30,.75) !important;  
-  }
-  .navbar.is-dark {
-     background-color: rgb(0,0,0) !important;
   }
 }
 
