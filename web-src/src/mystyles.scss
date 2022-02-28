@@ -315,3 +315,11 @@ hr.fd-navbar-divider {
 .hero-body {
   padding: 1.5rem !important;
 }
+
+.navbar.is-dark .navbar-brand>.navbar-item,
+.navbar.is-dark .navbar-brand .navbar-link,
+.navbar.is-white .navbar-brand>.navbar-item,
+.navbar.is-white .navbar-brand .navbar-link,
+{
+  min-height: 5rem;
+}
