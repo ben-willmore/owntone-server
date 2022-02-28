@@ -15,6 +15,7 @@
                     type="text"
                     placeholder="Search"
                     autocomplete="off"
+                    spellcheck="off"
                   />
                   <span class="icon is-left">
                     <i class="mdi mdi-magnify" />
