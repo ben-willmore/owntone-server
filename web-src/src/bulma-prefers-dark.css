@@ -3850,12 +3850,15 @@
   .navbar.is-white .navbar-brand .navbar-link {
     color: #0a0a0a;
   }
-  .navbar.is-white .navbar-brand > a.navbar-item:hover, .navbar.is-white .navbar-brand > a.navbar-item.is-active,
-  .navbar.is-white .navbar-brand .navbar-link:hover,
-  .navbar.is-white .navbar-brand .navbar-link.is-active {
-    background-color: #d9d9d9;
-    color: #0a0a0a;
+  .navbar.is-white .navbar-brand > a.navbar-item:hover,
+  .navbar.is-white .navbar-brand .navbar-link:hover {
+    background-color: #3c3c3c;
   }
+  .navbar.is-white .navbar-brand > a.navbar-item.is-active,
+  .navbar.is-white .navbar-brand .navbar-link.is-active {
+    background-color: #0a0a0a;
+  }
+
   .navbar.is-white .navbar-brand .navbar-link::after {
     border-color: #0a0a0a;
   }
@@ -3878,8 +3881,8 @@
   .navbar.is-white .navbar-end > a.navbar-item.is-active,
   .navbar.is-white .navbar-end .navbar-link:hover,
   .navbar.is-white .navbar-end .navbar-link.is-active {
-    background-color: #d9d9d9;
-    color: #0a0a0a;
+    background-color: #0f0f0f;
+    color: whitesmoke;
   }
   .navbar.is-white .navbar-start .navbar-link::after,
   .navbar.is-white .navbar-end .navbar-link::after {
