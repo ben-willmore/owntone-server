@@ -1,7 +1,12 @@
 @charset "utf-8";
 
+/* Make the primary match the link color so all highlights are the same */
+$primary: #485fc7;
+$primary-dark: #485fc7;
+
 @import 'bulma/bulma.sass';
 @import 'bulma-switch';
+@import 'bulma-prefers-dark.scss';
 
 /* Volume slider */
 .slider {
@@ -25,9 +30,9 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin: 0 auto 16px auto;
   --slider-height: 4px;
-  --slider-connect-bg: hsl(171, 100%, 41%);
-  --slider-tooltip-bg: hsl(171, 100%, 41%);
-  --slider-handle-bg: hsl(171, 100%, 41%);
+  --slider-connect-bg: $primary;
+  --slider-tooltip-bg: $primary;
+  --slider-handle-bg: $primary;
   --slider-handle-border: 0;
   --slider-handle-width: 10px;
   --slider-handle-height: 10px;
@@ -37,10 +42,10 @@
   --slider-handle-ring-width: 3px;
 }
 
-.progress-bar {
-  background-color: $info;
+.fd-progress-bar {
+  background-color: $primary !important;
   border-radius: 9999px;
-  height: 4px;
+  height: 12px;
 }
 
 .media.with-progress h2:last-of-type {
@@ -333,4 +338,51 @@ hr.fd-navbar-divider {
   align-items: center;
   display: flex;
   justify-content: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .fd-progress-bar {
+    background-color: $primary-dark !important;
+  }
+  /* navbar icons and active airplay icons */
+  span.icon {
+    color: white;
+  }
+  /* inactive airplay icons */
+  .icon.has-text-grey-light {
+    color: rgb(100,100,100) !important;
+  }
+  .mdi-dots-vertical {
+    color: rgb(200,200,200) !important;
+  }
+  .fd-tabs-section {
+    background-color: rgb(20, 20, 20);
+  }
+  .card-footer-item.has-text-dark {
+    color: #c8c8c8 !important;
+  }
+  .card-footer-item.has-text-dark:hover {
+    color: #c8c8c8 !important;
+  }
+  .slider-base {
+    background-color: rgb(100,100,100) !important;
+  }
+  .slider {
+    --slider-connect-bg: rgb(255,255,255) !important;
+    --slider-tooltip-bg: rgb(255,255,255) !important;
+  }
+
+  /* the following override the "link" color */
+  p.title.is-4 > .has-text-link {
+    color: $primary-dark !important;
+  }
+  .title.is-6.has-text-link {
+    color: $primary-dark !important;  
+  }
+  .subtitle.is-6 > .has-text-link {
+    color: $primary-dark !important;  
+  }
+  a.navbar-item > b {
+    color: #ffffff;
+  }
 }
