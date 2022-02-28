@@ -1,4 +1,5 @@
 /*! Bulma Prefers Dark  | MIT License | github.com/jloh/bulma-prefers-dark */
+
 @media (prefers-color-scheme: dark) {
   html {
     background-color: #17181c;
@@ -7,7 +8,7 @@
     color: #b5b5b5;
   }
   a {
-    color: #485fc7;
+    color: $primary-dark;
   }
   a:hover {
     color: #dbdbdb;
@@ -35,10 +36,10 @@
     color: #b5b5b5;
   }
   a.box:hover, a.box:focus {
-    box-shadow: 0 2px 3px rgba(255, 255, 255, 0.1), 0 0 0 1px #485fc7;
+    box-shadow: 0 2px 3px rgba(255, 255, 255, 0.1), 0 0 0 1px $primary-dark;
   }
   a.box:active {
-    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 0 0 1px #485fc7;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 0 0 1px $primary-dark;
   }
   .button {
     background-color: #0a0a0a;
@@ -50,7 +51,7 @@
     color: #dbdbdb;
   }
   .button:focus, .button.is-focused {
-    border-color: #485fc7;
+    border-color: $primary-dark;
     color: #dbdbdb;
   }
   .button:focus:not(:active), .button.is-focused:not(:active) {
@@ -546,7 +547,7 @@
   .textarea.is-focused,
   .textarea:active,
   .textarea.is-active {
-    border-color: #485fc7;
+    border-color: $primary-dark;
     box-shadow: 0 0 0 0.125em rgba(94, 163, 228, 0.25);
   }
   .input[disabled],
@@ -653,7 +654,7 @@
     color: #b5b5b5;
   }
   .select:not(.is-multiple):not(.is-loading)::after {
-    border-color: #485fc7;
+    border-color: $primary-dark;
   }
   .select select {
     background-color: #0a0a0a;
@@ -676,7 +677,7 @@
     border-color: #4a4a4a;
   }
   .select select:focus, .select select.is-focused, .select select:active, .select select.is-active {
-    border-color: #485fc7;
+    border-color: $primary-dark;
     box-shadow: 0 0 0 0.125em rgba(94, 163, 228, 0.25);
   }
   .select select[disabled],
@@ -1170,7 +1171,7 @@
     background-color: #242424;
   }
   .breadcrumb a {
-    color: #485fc7;
+    color: $primary-dark;
   }
   .breadcrumb a:hover {
     color: #dbdbdb;
@@ -1212,7 +1213,7 @@
   }
   a.dropdown-item.is-active,
   button.dropdown-item.is-active {
-    background-color: #485fc7;
+    background-color: $primary-dark;
     color: #fff;
   }
   .dropdown-divider {
@@ -1229,7 +1230,7 @@
     border-bottom: 1px solid #363636;
   }
   .list-item.is-active {
-    background-color: #485fc7;
+    background-color: $primary-dark;
     color: #fff;
   }
   a.list-item {
@@ -1249,7 +1250,7 @@
     color: #dbdbdb;
   }
   .menu-list a.is-active {
-    background-color: #485fc7;
+    background-color: $primary-dark;
     color: #fff;
   }
   .menu-list li ul {
@@ -1532,7 +1533,7 @@
   .navbar.is-light .navbar-brand > a.navbar-item.is-active,
   .navbar.is-light .navbar-brand .navbar-link.is-active
   {
-    background-color: #485fc7;
+    background-color: $primary-dark;
   }  
   .navbar.is-light .navbar-brand .navbar-link::after {
     border-color: #363636;
@@ -1542,10 +1543,10 @@
   }
   .navbar.is-light .navbar-burger:hover,
    {
-    background-color: #485fc7;
+    background-color: $primary-dark;
   }
   .navbar-burger:is-active {
-    background-color: #485fc7;
+    background-color: $primary-dark;
   }
 }
 
@@ -1567,7 +1568,7 @@
   .navbar.is-light .navbar-start .navbar-link.is-active,
   .navbar.is-light .navbar-end > a.navbar-item.is-active,
   .navbar.is-light .navbar-end .navbar-link.is-active {
-    background-color: #485fc7;
+    background-color: $primary-dark;
   }
 
   .navbar.is-light .navbar-start .navbar-link::after,
@@ -1577,7 +1578,7 @@
   .navbar.is-light .navbar-item.has-dropdown:hover .navbar-link,
   .navbar.is-light .navbar-dropdown a.navbar-item.is-active,
   .navbar.is-light .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: #485fc7;
+    background-color: $primary-dark;
     color: #141414;
   }
 }
@@ -1599,7 +1600,7 @@
   .navbar.is-dark .navbar-brand > a.navbar-item.is-active,
   .navbar.is-dark .navbar-brand .navbar-link.is-active
   {
-    background-color: #485fc7;
+    background-color: $primary-dark;
   }
   .navbar.is-dark .navbar-brand .navbar-link::after {
     border-color: whitesmoke;
@@ -1659,17 +1660,17 @@
   .navbar-link:hover,
   .navbar-link.is-active {
     background-color: #121212;
-    color: #485fc7;
+    color: $primary-dark;
   }
   .navbar-item:hover {
-    border-bottom-color: #485fc7;
+    border-bottom-color: $primary-dark;
   }
   .navbar-item.is-active {
-    border-bottom-color: #485fc7;
-    color: #485fc7;
+    border-bottom-color: $primary-dark;
+    color: $primary-dark;
   }
   .navbar-link:not(.is-arrowless)::after {
-    border-color: #485fc7;
+    border-color: $primary-dark;
   }
   .navbar-divider {
     background-color: #242424;
@@ -1693,7 +1694,7 @@
   }
   .navbar.is-transparent .navbar-dropdown a.navbar-item.is-active {
     background-color: #242424;
-    color: #485fc7;
+    color: $primary-dark;
   }
   .navbar-item.has-dropdown-up .navbar-dropdown {
     border-bottom: 2px solid #363636;
@@ -1710,7 +1711,7 @@
   }
   .navbar-dropdown a.navbar-item.is-active {
     background-color: #242424;
-    color: #485fc7;
+    color: $primary-dark;
   }
   .navbar.is-spaced .navbar-dropdown, .navbar-dropdown.is-boxed {
     box-shadow: 0 8px 8px rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -1743,7 +1744,7 @@
   .pagination-previous:focus,
   .pagination-next:focus,
   .pagination-link:focus {
-    border-color: #485fc7;
+    border-color: $primary-dark;
   }
   .pagination-previous:active,
   .pagination-next:active,
@@ -1758,8 +1759,8 @@
     color: #7a7a7a;
   }
   .pagination-link.is-current {
-    background-color: #485fc7;
-    border-color: #485fc7;
+    background-color: $primary-dark;
+    border-color: $primary-dark;
     color: #fff;
   }
   .pagination-ellipsis {
@@ -1792,17 +1793,17 @@
     color: #b5b5b5;
   }
   .panel-list a:hover {
-    color: #485fc7;
+    color: $primary-dark;
   }
   .panel-block {
     color: #dbdbdb;
   }
   .panel-block.is-active {
-    border-left-color: #485fc7;
+    border-left-color: $primary-dark;
     color: #dbdbdb;
   }
   .panel-block.is-active .panel-icon {
-    color: #485fc7;
+    color: $primary-dark;
   }
   a.panel-block:hover,
   label.panel-block:hover {
@@ -1817,8 +1818,8 @@
     color: #dbdbdb;
   }
   .tabs li.is-active a {
-    border-bottom-color: #485fc7;
-    color: #485fc7;
+    border-bottom-color: $primary-dark;
+    color: $primary-dark;
   }
   .tabs ul {
     border-bottom-color: #363636;
@@ -1839,8 +1840,8 @@
     border-color: #4a4a4a;
   }
   .tabs.is-toggle li.is-active a {
-    background-color: #485fc7;
-    border-color: #485fc7;
+    background-color: $primary-dark;
+    border-color: $primary-dark;
     color: #fff;
   }
 }
