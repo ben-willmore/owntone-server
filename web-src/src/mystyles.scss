@@ -1,8 +1,11 @@
 @charset "utf-8";
 
+/* Make the primary match the link color so all highlights are the same */
+$primary-dark: #485fc7;
+
 @import 'bulma/bulma.sass';
 @import 'bulma-switch';
-@import 'bulma-prefers-dark';
+@import 'bulma-prefers-dark.scss';
 
 /* Volume slider */
 .slider {
@@ -38,10 +41,10 @@
   --slider-handle-ring-width: 3px;
 }
 
-.progress-bar {
-  background-color: $info;
+.fd-progress-bar {
+  background-color: hsl(204, 86%, 53%) !important;
   border-radius: 9999px;
-  height: 4px;
+  height: 12px;
 }
 
 .media.with-progress h2:last-of-type {
@@ -318,6 +321,9 @@ hr.fd-navbar-divider {
 }
 
 @media (prefers-color-scheme: dark) {
+  .fd-progress-bar {
+    background-color: $primary-dark !important;
+  }
   /* navbar icons and active airplay icons */
   span.icon {
     color: white;
@@ -344,5 +350,19 @@ hr.fd-navbar-divider {
   .slider {
     --slider-connect-bg: rgb(255,255,255) !important;
     --slider-tooltip-bg: rgb(255,255,255) !important;
+  }
+
+  /* the following override the "link" color */
+  p.title.is-4 > .has-text-link {
+    color: $primary-dark !important;
+  }
+  .title.is-6.has-text-link {
+    color: $primary-dark !important;  
+  }
+  .subtitle.is-6 > .has-text-link {
+    color: $primary-dark !important;  
+  }
+  a.navbar-item > b {
+    color: #ffffff;
   }
 }

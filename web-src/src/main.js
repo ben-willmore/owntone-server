@@ -16,7 +16,6 @@ const app = createApp(App)
   .use(store)
   .use(router)
   .use(VueProgressBar, {
-    color: 'hsl(204, 86%, 53%)',
     failedColor: 'red',
     height: '1px'
   })
