@@ -97,6 +97,7 @@ html {
   --color-85: #{$primary};
   --color-86: #0a0a0a;
   --color-87: #d5d5d5;
+  --color-88: #000000;
 }
 
 html.dark-theme {
@@ -187,6 +188,7 @@ html.dark-theme {
   --color-85: #{$primary-dark};
   --color-86: #ffffff;
   --color-87: #141414;
+  --color-88: #ffffff;
 }
 
 /* Volume slider */
@@ -592,6 +594,9 @@ a.box:active {
 .button.is-text:active, .button.is-text.is-active {
   background-color: var(--color-12);
   color: var(--color-8);
+}
+.navbar-item a.button.is-white.is-small {
+    color: var(--color-88);
 }
 .button.is-white {
   background-color: var(--color-10);
@@ -1948,7 +1953,7 @@ a.list-item {
   color: var(--color-10);
 }
 
-@media screen and (min-width: 1088px) {
+@media screen and (min-width: 1024px) {
   .navbar.is-white .navbar-start > .navbar-item,
   .navbar.is-white .navbar-start .navbar-link,
   .navbar.is-white .navbar-end > .navbar-item,
@@ -2001,7 +2006,7 @@ a.list-item {
   color: white;
 }
 
-@media screen and (min-width: 1088px) {
+@media screen and (min-width: 1024px) {
   .navbar.is-black .navbar-start > .navbar-item,
   .navbar.is-black .navbar-start .navbar-link,
   .navbar.is-black .navbar-end > .navbar-item,
@@ -2068,7 +2073,7 @@ a.list-item {
   color: var(--color-83);
 }
 
-@media screen and (min-width: 1088px) {
+@media screen and (min-width: 1024px) {
   .navbar.is-light .navbar-start > .navbar-item,
   .navbar.is-light .navbar-start .navbar-link,
   .navbar.is-light .navbar-end > .navbar-item,
@@ -2147,7 +2152,7 @@ a.list-item {
   color: var(--color-66);
 }
 
-@media screen and (min-width: 1088px) {
+@media screen and (min-width: 1024px) {
   .navbar.is-dark .navbar-start > .navbar-item,
   .navbar.is-dark .navbar-start .navbar-link,
   .navbar.is-dark .navbar-end > .navbar-item,
@@ -2212,7 +2217,7 @@ a.navbar-item:hover, a.navbar-item.is-active,
   background-color: var(--color-2);
 }
 
-@media screen and (max-width: 1087px) {
+@media screen and (max-width: 1023px) {
   .navbar-menu {
     background-color: var(--color-1);
     box-shadow: 0 8px 16px var(--color-3);
@@ -2222,7 +2227,7 @@ a.navbar-item:hover, a.navbar-item.is-active,
   }
 }
 
-@media screen and (min-width: 1088px) {
+@media screen and (min-width: 1024px) {
   .navbar.is-transparent .navbar-dropdown a.navbar-item:hover {
     background-color: var(--color-2);
     color: white;
@@ -2403,7 +2408,7 @@ label.panel-block:hover {
   background-color: var(--color-48);
 }
 
-@media screen and (max-width: 1087px) {
+@media screen and (max-width: 1023px) {
   .hero.is-light .navbar-menu, .hero.is-light-dark .navbar-menu {
     background-color: var(--color-8);
   }
