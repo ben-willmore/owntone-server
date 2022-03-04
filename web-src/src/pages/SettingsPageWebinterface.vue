@@ -178,15 +178,17 @@ export default {
       const system_scheme = window.matchMedia("(prefers-color-scheme: dark)")
       const preferred_colorscheme = localStorage.getItem("preferred_colorscheme")
 
-      if (preferred_colorscheme === "dark" || (preferred_colorscheme === "system" && system_scheme.matches)) {
+      if (preferred_colorscheme === "dark" ||
+          (preferred_colorscheme === "system" && system_scheme.matches)) {
         document.documentElement.classList.add("dark-theme")
-      } else if (preferred_colorscheme == "light"|| (preferred_colorscheme === "system" && !system_scheme.matches)) {
+      } else if (preferred_colorscheme == "light" ||
+          (preferred_colorscheme === "system" && !system_scheme.matches)) {
         document.documentElement.classList.remove("dark-theme")
       }
     };
 
     // set checkbox to match localStorage
-    document.querySelector('input[id="' + localStorage.getItem('preferred_colorscheme') + '"]').checked = true;
+    document.querySelector('input[id="' + localStorage.getItem('preferred_colorscheme') + '"]').checked = true
 
     // listen for changes on radio buttons, and set localStorage and current colorscheme to match
     var span = document.getElementById('colorscheme_radio')
