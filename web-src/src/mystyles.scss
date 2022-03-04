@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /* Make the primary match the link color so all highlights are the same */
-$primary: #485fc7;
+$primary: #00d1b2;
 $primary-dark: #485fc7;
 
 @import 'bulma/bulma.sass';
@@ -11,7 +11,7 @@ $primary-dark: #485fc7;
 
 html {
   --color-1: #ffffff;
-  --color-2: whitesmoke;
+  --color-2: #f5f5f5;
   --color-3: rgba(10, 10, 10, 0.1);
   --color-4: rgba(10, 10, 10, 0.2);
   --color-5: rgba(72, 95, 199, 0.25);
@@ -19,14 +19,14 @@ html {
   --color-7: #4a4a4a;
   --color-8: #363636;
   --color-9: #da1039;
-  --color-10: white;
+  --color-10: #ffffff;
   --color-11: #dbdbdb;
   --color-12: #e8e8e8;
   --color-13: #f9f9f9;
   --color-14: #f2f2f2;
-  --color-15: white;
+  --color-15: #ffffff;
   --color-16: #f2f2f2;
-  --color-17: whitesmoke;
+  --color-17: #f5f5f5;
   --color-18: rgba(0, 0, 0, 0.7);
   --color-19: rgba(0, 0, 0, 0.7);
   --color-20: #e8e8e8;
@@ -39,14 +39,14 @@ html {
   --color-27: #00c4a7;
   --color-28: #00b89c;
   --color-29: #7a7a7a;
-  --color-30: white;
+  --color-30: #ffffff;
   --color-31: #eeeeee;
   --color-32: #2f2f2f;
   --color-33: #eeeeee;
   --color-34: #d5d5d5;
-  --color-35: #485fc7;
+  --color-35: #ff0000; // $ primary
   --color-36: #3e8ed0;
-  --color-37: #48c78e;
+  --color-37: #ff0000; // $ primary
   --color-38: #ffe08a;
   --color-39: #f14668;
   --color-40: #fafafa;
@@ -56,10 +56,10 @@ html {
   --color-44: #effaf5;
   --color-45: #ffe08a;
   --color-46: #f14668;
-  --color-47: white;
+  --color-47: #ffffff;
   --color-48: rgba(0, 0, 0, 0.7);
   --color-49: #dfd8d9;
-  --color-50: white;
+  --color-50: #ffffff;
   --color-51: rgba(255, 255, 255, 0.25);
   --color-52: rgba(10, 10, 10, 0.25);
   --color-53: rgba(245, 245, 245, 0.25);
@@ -74,7 +74,7 @@ html {
   --color-62: rgba(0, 0, 0, 0.7);
   --color-63: rgba(0, 0, 0, 0.7);
   --color-64: #d1d5da;
-  --color-65: #e8e8e8;
+  --color-65: #{$primary};
   --color-66: #ffffff;
   --color-67: #ffffff;
   --color-68: #4a4a4a;
@@ -90,12 +90,13 @@ html {
   --color-78: #4a4a4a;
   --color-79: #4a4a4a; // top navbar active item
   --color-80: #0a0a0a;
-  --color-81: #485fc7;
-  --color-82: #485fc7;
+  --color-81: #{$primary};
+  --color-82: #{$primary};
   --color-83: #4a4a4a;
   --color-84: #dbdbdb;
-  --color-85: #485fc7;
+  --color-85: #{$primary};
   --color-86: #0a0a0a;
+  --color-87: #d5d5d5;
 }
 
 html.dark-theme {
@@ -163,8 +164,8 @@ html.dark-theme {
   --color-62: rgba(54, 54, 54, 0.7);
   --color-63: rgba(10, 10, 10, 0.1);
   --color-64: #646464;
-  --color-65: #485fc7;
-  --color-66: whitesmoke;
+  --color-65: #{$primary-dark};
+  --color-66: #f5f5f5;
   --color-67: #141414;
   --color-68: #ffffff;
   --color-69: #000000;
@@ -174,17 +175,18 @@ html.dark-theme {
   --color-73: #ffffff;
   --color-74: #646464;
   --color-75: #ffffff;
-  --color-76: #485fc7;
+  --color-76: #{$primary-dark};
   --color-77: #ffffff;
   --color-78: #ffffff;
   --color-79: #ffffff;
   --color-80: #ffffff;
   --color-81: #ffffff;
-  --color-82: #485fc7;
+  --color-82: #{$primary-dark};
   --color-83: #ffffff;
   --color-84: #646464;
-  --color-85: #485fc7;
+  --color-85: #{$primary-dark};
   --color-86: #ffffff;
+  --color-87: #141414;
 }
 
 /* Volume slider */
@@ -524,9 +526,11 @@ body {
   background-color: var(--color-1);
   color: var(--color-7);
 }
+/*
 a {
   color: var(--color-85);
 }
+*/
 a:hover {
   color: var(--color-8);
 }
@@ -2059,7 +2063,7 @@ a.list-item {
   background-color: var(--color-65);
   color: var(--color-83);
 }
-.navbar-burger:is-active {
+.navbar.is-light .navbar-burger:is-active {
   background-color: var(--color-65);
   color: var(--color-83);
 }
@@ -2089,26 +2093,32 @@ a.list-item {
   .navbar.is-light .navbar-end .navbar-link::after {
     border-color: var(--color-6);
   }
-  .navbar.is-light .navbar-item.has-dropdown:hover .navbar-link,
-  .navbar.is-light .navbar-dropdown a.navbar-item.is-active,
+  .navbar.is-light .navbar-dropdown a.navbar-item.is-active {
+    background-color: var(--color-13);
+    color: var(--color-82);
+  }
   .navbar.is-light .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: var(--color-65);
+    background-color: var(--color-87);
+    color: var(--color-48);
+  }
+  .navbar.is-light .navbar-item.has-dropdown:hover .navbar-link,
+  .navbar.is-light .navbar-dropdown a.navbar-item:hover {
     color: var(--color-48);
   }
 }
 
-.navbar-dropdown a.navbar-item,
-.navbar-item.has-dropdown a.navbar-link.is-arrowless {
+.navbar.is-light .navbar-dropdown a.navbar-item,
+.navbar.is-light .navbar-item.has-dropdown a.navbar-link.is-arrowless {
   color: var(--color-80);
 }
 
-.navbar-dropdown a.navbar-item:hover,
-.navbar-item.has-dropdown a.navbar-link.is-arrowless:hover {
+.navbar.is-light .navbar-dropdown a.navbar-item:hover,
+.navbar.is-light .navbar-item.has-dropdown a.navbar-link.is-arrowless:hover {
   color: var(--color-81);
 }
 
-.navbar-dropdown a.navbar-item.is-active,
-.navbar-dropdown a.navbar-item.is-active>b {
+.navbar.is-light .navbar-dropdown a.navbar-item.is-active,
+.navbar.is-light .navbar-dropdown a.navbar-item.is-active>b {
   color: var(--color-82);
 }
 
