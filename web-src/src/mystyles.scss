@@ -98,6 +98,8 @@ html {
   --color-86: #0a0a0a;
   --color-87: #d5d5d5;
   --color-88: #000000;
+  --color-89: #f2f2f2;
+  --color-90: #ffffff;
 }
 
 html.dark-theme {
@@ -189,6 +191,8 @@ html.dark-theme {
   --color-86: #ffffff;
   --color-87: #141414;
   --color-88: #ffffff;
+  --color-89: #363c3c;
+  --color-90: #ffffff;
 }
 
 /* Volume slider */
@@ -1939,7 +1943,8 @@ a.list-item {
 }
 .navbar.is-white .navbar-brand > a.navbar-item:hover,
 .navbar.is-white .navbar-brand .navbar-link:hover {
-  background-color: var(--color-13);
+  background-color: var(--color-23);
+  color: var(--color-66);
 }
 .navbar.is-white .navbar-brand > a.navbar-item.is-active,
 .navbar.is-white .navbar-brand .navbar-link.is-active {
@@ -1960,13 +1965,15 @@ a.list-item {
   .navbar.is-white .navbar-end .navbar-link {
     color: var(--color-10);
   }
-  .navbar.is-white .navbar-start > a.navbar-item:hover, .navbar.is-white .navbar-start > a.navbar-item.is-active,
+  .navbar.is-white .navbar-start > a.navbar-item:hover,
+  .navbar.is-white .navbar-start > a.navbar-item.is-active,
   .navbar.is-white .navbar-start .navbar-link:hover,
   .navbar.is-white .navbar-start .navbar-link.is-active,
   .navbar.is-white .navbar-end > a.navbar-item:hover,
   .navbar.is-white .navbar-end > a.navbar-item.is-active,
   .navbar.is-white .navbar-end .navbar-link:hover,
-  .navbar.is-white .navbar-end .navbar-link.is-active {
+  .navbar.is-white .navbar-end .navbar-link.is-active,
+  {
     background-color: var(--color-23);
     color: var(--color-66);
   }
@@ -1974,10 +1981,16 @@ a.list-item {
   .navbar.is-white .navbar-end .navbar-link::after {
     border-color: var(--color-10);
   }
+  // bottom right menu item
   .navbar.is-white .navbar-item.has-dropdown:hover .navbar-link,
   .navbar.is-white .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: var(--color-14);
+    background-color: var(--color-89) !important;
     color: var(--color-10);
+  }
+  // play / seek buttons
+  .navbar.is-white .navbar-brand .navbar-item:hover {
+    background-color: var(--color-72) !important;    
+    color: var(--color-90) !important;
   }
   .navbar.is-white .navbar-dropdown a.navbar-item.is-active {
     background-color: var(--color-15);
@@ -2065,8 +2078,8 @@ a.list-item {
 }
 .navbar.is-light .navbar-burger:hover,
  {
-  background-color: var(--color-65);
-  color: var(--color-83);
+  background-color: var(--color-71);
+  color: var(--color-78);
 }
 .navbar.is-light .navbar-burger:is-active {
   background-color: var(--color-65);
@@ -2159,23 +2172,26 @@ a.list-item {
   .navbar.is-dark .navbar-end .navbar-link {
     color: var(--color-66);
   }
-  .navbar.is-dark .navbar-start > a.navbar-item:hover, .navbar.is-dark .navbar-start > a.navbar-item.is-active,
+  .navbar.is-dark .navbar-start > a.navbar-item:hover,
+  .navbar.is-dark .navbar-start > a.navbar-item.is-active,
   .navbar.is-dark .navbar-start .navbar-link:hover,
   .navbar.is-dark .navbar-start .navbar-link.is-active,
   .navbar.is-dark .navbar-end > a.navbar-item:hover,
   .navbar.is-dark .navbar-end > a.navbar-item.is-active,
   .navbar.is-dark .navbar-end .navbar-link:hover,
   .navbar.is-dark .navbar-end .navbar-link.is-active {
-    background-color: var(--color-23);
+
+    background-color: var(--color-23) !important;
     color: var(--color-66);
   }
   .navbar.is-dark .navbar-start .navbar-link::after,
   .navbar.is-dark .navbar-end .navbar-link::after {
     border-color: var(--color-66);
   }
+  // bottom right menu item
   .navbar.is-dark .navbar-item.has-dropdown:hover .navbar-link,
   .navbar.is-dark .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: var(--color-77);
+    background-color: var(--color-89) !important;
     color: var(--color-66);
   }
   .navbar.is-dark .navbar-dropdown a.navbar-item.is-active {
