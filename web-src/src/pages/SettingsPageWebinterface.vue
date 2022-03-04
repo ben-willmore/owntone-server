@@ -182,12 +182,12 @@ export default {
       if (preferred_colorscheme === "dark" ||
           (preferred_colorscheme === "system" && system_scheme.matches)) {
         document.documentElement.classList.add("dark-theme")
-        meta_tag.setAttribute('content', '#0a0a0a')
+        meta_tag.setAttribute('content', '#000000')
 
       } else if (preferred_colorscheme == "light" ||
           (preferred_colorscheme === "system" && !system_scheme.matches)) {
         document.documentElement.classList.remove("dark-theme")
-        meta_tag.setAttribute('content', '#f5f5f5')
+        meta_tag.setAttribute('content', '#ffffff')
       }
     };
 
