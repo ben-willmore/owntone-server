@@ -88,12 +88,14 @@ html {
   --color-76: #292929;
   --color-77: #4a4a4a;
   --color-78: #4a4a4a;
-  --color-79: #e8e8e8; // top navbar active item
+  --color-79: #4a4a4a; // top navbar active item
   --color-80: #0a0a0a;
   --color-81: #485fc7;
   --color-82: #485fc7;
   --color-83: #4a4a4a;
   --color-84: #dbdbdb;
+  --color-85: #485fc7;
+  --color-86: #0a0a0a;
 }
 
 html.dark-theme {
@@ -181,6 +183,8 @@ html.dark-theme {
   --color-82: #485fc7;
   --color-83: #ffffff;
   --color-84: #646464;
+  --color-85: #485fc7;
+  --color-86: #ffffff;
 }
 
 /* Volume slider */
@@ -521,7 +525,7 @@ body {
   color: var(--color-7);
 }
 a {
-  color: var(--color-65);
+  color: var(--color-85);
 }
 a:hover {
   color: var(--color-8);
@@ -2093,11 +2097,19 @@ a.list-item {
   }
 }
 
-.navbar-dropdown a.navbar-item {
+.navbar-dropdown a.navbar-item,
+.navbar-item.has-dropdown a.navbar-link.is-arrowless {
   color: var(--color-80);
 }
-.navbar-dropdown a.navbar-item:hover {
+
+.navbar-dropdown a.navbar-item:hover,
+.navbar-item.has-dropdown a.navbar-link.is-arrowless:hover {
   color: var(--color-81);
+}
+
+.navbar-dropdown a.navbar-item.is-active,
+.navbar-dropdown a.navbar-item.is-active>b {
+  color: var(--color-82);
 }
 
 .navbar.is-dark {
@@ -2352,9 +2364,9 @@ label.panel-block:hover {
   border-color: var(--color-11);
 }
 .tabs.is-toggle li.is-active a {
-  background-color: var(--color-65);
-  border-color: var(--color-65);
-  color: var(--color-26);
+  background-color: var(--color-85);
+  border-color: var(--color-6);
+  color: var(--color-86);
 }
 
 .hero.is-light, .hero.is-light-dark {
