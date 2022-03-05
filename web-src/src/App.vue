@@ -72,7 +72,7 @@ export default {
     moment.locale(navigator.language)
     this.connect()
 
-    window.addEventListener(focus, () => this.connect())
+    // window.addEventListener(focus, () => this.connect())
 
     //  Start the progress bar on app start
     this.$Progress.start()
@@ -99,23 +99,44 @@ export default {
 
   methods: {
     connect: function () {
-      this.$store.dispatch('add_notification', { text: 'Connecting to OwnTone server', type: 'info', topic: 'connection', timeout: 2000 })
+      /*
+      this.$store.dispatch('add_notification', {
+        text: 'Connecting to OwnTone server',
+        type: 'info',
+        topic: 'connection',
+        timeout: 2000
+      })
+      */
+      // this.$store.state.socket_connected = false
 
       webapi.config().then(({ data }) => {
         this.$store.commit(types.UPDATE_CONFIG, data)
         this.$store.commit(types.HIDE_SINGLES, data.hide_singles)
         document.title = data.library_name
 
-        this.open_ws()
-        this.$Progress.finish()
-      }).catch(() => {
-        this.$store.dispatch('add_notification', { text: 'Failed to connect to OwnTone server', type: 'danger', topic: 'connection' })
-      })
+          this.open_ws()
+          this.$Progress.finish()
+        })
+        .catch(() => {
+          this.$store.dispatch('add_notification', {
+            text: 'Failed to connect to OwnTone server',
+            type: 'danger',
+            topic: 'connection'
+          })
+          // this.$store.state.socket_connected = false
+        })
     },
 
     open_ws: function () {
       if (this.$store.state.config.websocket_port <= 0) {
         this.$store.dispatch('add_notification', { text: 'Missing websocket port', type: 'danger' })
+        /*
+        this.$store.dispatch('add_notification', {
+          text: 'Missing websocket port',
+          type: 'danger'
+        })
+        */
+        // this.$store.state.socket_connected = false
         return
       }
 
@@ -132,14 +153,21 @@ export default {
         wsUrl = process.env.VUE_APP_WEBSOCKET_SERVER
       }
 
-      const socket = new ReconnectingWebSocket(
-        wsUrl,
-        'notify',
-        { reconnectInterval: 3000 }
-      )
+      const socket = new ReconnectingWebSocket(wsUrl, 'notify', {
+        reconnectInterval: 1000,
+        maxReconnectInterval: 2000
+      })
 
       socket.onopen = function () {
-        vm.$store.dispatch('add_notification', { text: 'Connection to server established', type: 'primary', topic: 'connection', timeout: 2000 })
+        /* 
+        vm.$store.dispatch('add_notification', {
+          text: 'Connection to server established',
+          type: 'success',
+          topic: 'connection',
+          timeout: 2000
+        })
+        */
+        // vm.$store.state.socket_connected = true
         vm.reconnect_attempts = 0
         socket.send(JSON.stringify({ notify: ['update', 'database', 'player', 'options', 'outputs', 'volume', 'queue', 'spotify', 'lastfm', 'pairing'] }))
 
@@ -153,12 +181,44 @@ export default {
         vm.update_pairing()
       }
       socket.onclose = function () {
+        // reconnectingWebsocket should automagically reconnect so we need do nothing
         // vm.$store.dispatch('add_notification', { text: 'Connection closed', type: 'danger', timeout: 2000 })
+        // vm.$store.state.socket_connected = false
       }
       socket.onerror = function () {
+        console.log('refreshing')
+
+        // not sure refresh is necessary, but it's harmless
+        socket.refresh()
+
+        // might need to wait here?
+        vm.$forceUpdate()
+
+        console.log('refreshed')
+
         vm.reconnect_attempts++
-        vm.$store.dispatch('add_notification', { text: 'Connection lost. Reconnecting ... (' + vm.reconnect_attempts + ')', type: 'danger', topic: 'connection' })
+        /*
+        vm.$store.dispatch('add_notification', {
+          text:
+            'Connection lost. Reconnecting ... (' + vm.reconnect_attempts + ')',
+          type: 'danger',
+          topic: 'connection'
+        })
+        */
+        // vm.$store.state.socket_connected = false
       }
+
+      // these detect different ways of raising the window
+      // When this happens, we should reconnect to get up-to-date info
+      window.addEventListener('focus', function () {
+        console.log('got focus')
+        socket.onerror()
+      })
+      window.addEventListener('visibilitychange', function () {
+        console.log('visibility change')
+        socket.onerror()
+      })
+
       socket.onmessage = function (response) {
         const data = JSON.parse(response.data)
         if (data.notify.includes('update') || data.notify.includes('database')) {

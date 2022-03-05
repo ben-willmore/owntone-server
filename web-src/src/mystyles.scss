@@ -1,4 +1,9 @@
 
+/* Make the primary match the link color so all highlights are the same */
+$primary: rgb(227,118,57);
+$primary-dark: rgb(227,118,57);
+
+
 @import 'bulma';
 @import '~bulma-switch';
 
