@@ -93,7 +93,7 @@ export default {
     moment.locale(navigator.language)
     this.connect()
 
-    window.addEventListener(focus, () => this.connect())
+    // window.addEventListener(focus, () => this.connect())
 
     //  Start the progress bar on app start
     this.$Progress.start()
@@ -128,7 +128,7 @@ export default {
         timeout: 2000
       })
       */
-      this.$store.state.socket_connected = false
+      // this.$store.state.socket_connected = false
 
       webapi
         .config()
@@ -141,14 +141,12 @@ export default {
           this.$Progress.finish()
         })
         .catch(() => {
-          /*
           this.$store.dispatch('add_notification', {
             text: 'Failed to connect to OwnTone server',
             type: 'danger',
             topic: 'connection'
           })
-          */
-          this.$store.state.socket_connected = false
+          // this.$store.state.socket_connected = false
         })
     },
 
@@ -160,7 +158,7 @@ export default {
           type: 'danger'
         })
         */
-        this.$store.state.socket_connected = false
+        // this.$store.state.socket_connected = false
         return
       }
 
@@ -185,7 +183,8 @@ export default {
       }
 
       const socket = new ReconnectingWebSocket(wsUrl, 'notify', {
-        reconnectInterval: 3000
+        reconnectInterval: 1000,
+        maxReconnectInterval: 2000
       })
 
       socket.onopen = function () {
@@ -197,7 +196,7 @@ export default {
           timeout: 2000
         })
         */
-        vm.$store.state.socket_connected = true
+        // vm.$store.state.socket_connected = true
         vm.reconnect_attempts = 0
         socket.send(
           JSON.stringify({
@@ -226,10 +225,21 @@ export default {
         vm.update_pairing()
       }
       socket.onclose = function () {
+        // reconnectingWebsocket should automagically reconnect so we need do nothing
         // vm.$store.dispatch('add_notification', { text: 'Connection closed', type: 'danger', timeout: 2000 })
-        vm.$store.state.socket_connected = false
+        // vm.$store.state.socket_connected = false
       }
       socket.onerror = function () {
+        console.log('refreshing')
+
+        // not sure refresh is necessary, but it's harmless
+        socket.refresh()
+
+        // might need to wait here?
+        vm.$forceUpdate()
+
+        console.log('refreshed')
+
         vm.reconnect_attempts++
         /*
         vm.$store.dispatch('add_notification', {
@@ -239,8 +249,20 @@ export default {
           topic: 'connection'
         })
         */
-        vm.$store.state.socket_connected = false
+        // vm.$store.state.socket_connected = false
       }
+
+      // these detect different ways of raising the window
+      // When this happens, we should reconnect to get up-to-date info
+      window.addEventListener('focus', function () {
+        console.log('got focus')
+        socket.onerror()
+      })
+      window.addEventListener('visibilitychange', function () {
+        console.log('visibility change')
+        socket.onerror()
+      })
+
       socket.onmessage = function (response) {
         const data = JSON.parse(response.data)
         if (
