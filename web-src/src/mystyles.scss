@@ -1,8 +1,8 @@
 @charset "utf-8";
 
 /* Make the primary match the link color so all highlights are the same */
-$primary: #00d1b2;
-$primary-dark: #485fc7;
+$primary: rgb(227,119,57);
+$primary-dark: rgb(227,119,57);
 
 @import 'bulma/bulma.sass';
 @import 'bulma-switch';
