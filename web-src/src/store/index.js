@@ -51,8 +51,6 @@ export default createStore({
       },
 
       search_path: '/search/library',
-      socket_connected: false,
-
       recent_searches: [],
 
       hide_singles: false,
