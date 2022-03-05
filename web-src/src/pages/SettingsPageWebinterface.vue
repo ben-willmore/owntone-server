@@ -4,6 +4,24 @@
 
     <content-with-heading>
       <template #heading-left>
+        <div class="title is-4">Color scheme</div>
+      </template>
+
+      <template #content>
+        <span id="colorscheme_radio">
+        <input type="radio" id="system" name="colorscheme_radio" value="system">
+        <label for="system"> Use system setting</label><br>
+        <input type="radio" id="light" name="colorscheme_radio" value="light">
+        <label for="light"> Light mode</label><br>
+        <input type="radio" id="dark" name="colorscheme_radio" value="dark">
+        <label for="dark"> Dark mode</label><br>
+        </span>
+      </template>
+
+    </content-with-heading>
+
+    <content-with-heading>
+      <template #heading-left>
         <div class="title is-4">Navbar items</div>
       </template>
 
@@ -153,6 +171,43 @@ export default {
     settings_option_show_composer_now_playing() {
       return this.$store.getters.settings_option_show_composer_now_playing
     }
+  },
+
+  mounted() {
+    function setColorScheme() {
+      const system_scheme = window.matchMedia("(prefers-color-scheme: dark)")
+      const preferred_colorscheme = localStorage.getItem("preferred_colorscheme")
+      const meta_tag = document.querySelector( 'meta[name="theme-color"]' )
+
+      if (preferred_colorscheme === "dark" ||
+          (preferred_colorscheme === "system" && system_scheme.matches)) {
+        document.documentElement.classList.add("dark-theme")
+        meta_tag.setAttribute('content', '#000000')
+
+      } else if (preferred_colorscheme == "light" ||
+          (preferred_colorscheme === "system" && !system_scheme.matches)) {
+        document.documentElement.classList.remove("dark-theme")
+        meta_tag.setAttribute('content', '#ffffff')
+      }
+    };
+
+    // set checkbox to match localStorage
+    document.querySelector('input[id="' + localStorage.getItem('preferred_colorscheme') + '"]').checked = true
+
+    // listen for changes on radio buttons, and set localStorage and current colorscheme to match
+    var span = document.getElementById('colorscheme_radio')
+    var inputs = span.getElementsByTagName('input')
+    for (var i = 0; i < inputs.length; ++i) {
+      inputs[i].addEventListener("change", function () {
+        if (this.checked) {
+          localStorage.setItem("preferred_colorscheme", this.id)
+          setColorScheme()
+        }
+      });
+    }
+
+    setColorScheme()
+
   }
 }
 </script>
