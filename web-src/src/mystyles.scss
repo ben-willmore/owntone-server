@@ -508,18 +508,6 @@ hr.fd-navbar-divider {
   padding: 1.5rem !important;
 }
 
-.navbar.is-dark .navbar-brand>.navbar-item,
-.navbar.is-dark .navbar-brand .navbar-link,
-.navbar.is-white .navbar-brand>.navbar-item,
-.navbar.is-white .navbar-brand .navbar-link,
-{
-  min-height: 5rem;
-}
-
-.mdi.mdi-lan-disconnect {
-  color: rgb(255,0,0);
-}
-
 .fd-navbar-icon {
   width: 3.25rem;
   align-items: center;
@@ -2538,4 +2526,8 @@ a.navbar-item > b {
 // volume icon for disabled speaker
 span.icon.fd-has-action.has-text-grey-light {
     color: var(--color-91) !important;
+}
+
+.fd-radio {
+    margin: 10px 0px;
 }
