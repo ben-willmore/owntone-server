@@ -230,16 +230,6 @@ export default {
         // vm.$store.state.socket_connected = false
       }
       socket.onerror = function () {
-        console.log('refreshing')
-
-        // not sure refresh is necessary, but it's harmless
-        socket.refresh()
-
-        // might need to wait here?
-        vm.$forceUpdate()
-
-        console.log('refreshed')
-
         vm.reconnect_attempts++
         /*
         vm.$store.dispatch('add_notification', {
@@ -252,15 +242,45 @@ export default {
         // vm.$store.state.socket_connected = false
       }
 
-      // these detect different ways of raising the window
-      // When this happens, we should reconnect to get up-to-date info
-      window.addEventListener('focus', function () {
-        console.log('got focus')
-        socket.onerror()
-      })
-      window.addEventListener('visibilitychange', function () {
-        console.log('visibility change')
-        socket.onerror()
+      // When the app becomes active, force an update of all information, because we
+      // may have missed notifications while the app was inactive.
+      // There are two relevant events (focus and visibilitychange), so we throttle
+      // the updates to avoid multiple redundant updates
+      var update_throttled = false
+
+      function update_info() {
+        if ( update_throttled ) {
+          return
+        }
+        /*
+        vm.$store.dispatch('add_notification', {
+          text: 'Updating...',
+          type: 'info',
+          topic: 'connection',
+          timeout: 1000
+        })
+        */      
+
+        vm.update_outputs()
+        vm.update_player_status()
+        vm.update_library_stats()
+        vm.update_settings()
+        vm.update_queue()
+        vm.update_spotify()
+        vm.update_lastfm()
+        vm.update_pairing()
+
+        update_throttled = true
+        setTimeout(function () { update_throttled = false }, 500)
+      }
+
+      // These events are fired when the window becomes active in different ways
+      // When this happens, we should update 'now playing' info etc
+      window.addEventListener('focus', update_info)
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') {
+          update_info()
+        }
       })
 
       socket.onmessage = function (response) {
