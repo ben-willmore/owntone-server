@@ -203,10 +203,15 @@ html.dark-theme {
   width: 100%;
   margin-top: 16px;
   margin-bottom: 16px;
-  --slider-height: 4px;
   --slider-handle-ring-color: #3b82f630;
   --slider-handle-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.32);
   --slider-handle-shadow-active: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.42);
+}
+
+@media screen and (max-width: 1023px) {
+  .slider {
+    --slider-height: 8px;
+  }
 }
 
 /* Now playing progress bar */
@@ -228,6 +233,15 @@ html.dark-theme {
   --slider-handle-shadow-active: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.42);
   --slider-handle-ring-width: 3px;
 }
+
+@media screen and (max-width: 1023px) {
+  .seek-slider {
+    --slider-height: 8px;
+    --slider-handle-width: 20px;
+    --slider-handle-height: 20px;
+  }
+}
+
 
 .fd-progress-bar {
   background-color: var(--color-82) !important;
