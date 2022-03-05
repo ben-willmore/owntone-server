@@ -100,6 +100,7 @@ html {
   --color-88: #000000;
   --color-89: #f2f2f2;
   --color-90: #ffffff;
+  --color-91: #dcdcdc;
 }
 
 html.dark-theme {
@@ -108,7 +109,7 @@ html.dark-theme {
   --color-3: rgba(255, 255, 255, 0.1);
   --color-4: rgba(255, 255, 255, 0.2);
   --color-5: rgba(94, 163, 228, 0.25);
-  --color-6: #363636;
+  --color-6: #3c3c3c;
   --color-7: #b5b5b5;
   --color-8: #dbdbdb;
   --color-9: #eb002f;
@@ -174,7 +175,7 @@ html.dark-theme {
   --color-69: #000000;
   --color-70: #0a0a0a;
   --color-71: #3c3c3c;
-  --color-72: #363636;
+  --color-72: #3c3c3c;
   --color-73: #ffffff;
   --color-74: #646464;
   --color-75: #ffffff;
@@ -193,6 +194,7 @@ html.dark-theme {
   --color-88: #ffffff;
   --color-89: #363c3c;
   --color-90: #ffffff;
+  --color-91: #3e3e3e;
 }
 
 /* Volume slider */
@@ -2531,4 +2533,9 @@ a.navbar-item > b {
 
 .has-text-primary {
   color: var(--color-65) !important;
+}
+
+// volume icon for disabled speaker
+span.icon.fd-has-action.has-text-grey-light {
+    color: var(--color-91) !important;
 }
