@@ -2123,6 +2123,19 @@ a.list-item {
   .navbar.is-light .navbar-dropdown a.navbar-item:hover {
     color: var(--color-48);
   }
+
+  // top right menu item
+  .navbar.is-light .navbar-item.has-dropdown:hover .navbar-link,
+  .navbar.is-light .navbar-item.has-dropdown.is-active .navbar-link {
+    background-color: var(--color-89) !important;
+    color: var(--color-66);
+  }
+  .navbar.is-light .navbar-dropdown a.navbar-item.is-active {
+    background-color: var(--color-22);
+    color: var(--color-66);
+  }
+
+
 }
 
 .navbar.is-light .navbar-dropdown a.navbar-item,
