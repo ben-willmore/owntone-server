@@ -14,13 +14,15 @@
         <div class="container has-text-centered">
           <p class="control has-text-centered fd-progress-now-playing">
             <Slider
-              v-model="item_progress_ms"
+              v-model="visible_progress_ms"
               :min="0"
               :max="state.item_length_ms"
               :step="1000"
               :tooltips="false"
               :disabled="state.state === 'stop'"
               :classes="{ target: 'seek-slider' }"
+              :lazy="false"
+              @update="pause"
               @change="seek"
             />
             <!--range-slider
@@ -101,6 +103,10 @@ export default {
     return {
       item_progress_ms: 0,
       interval_id: 0,
+      visible_progress_ms: 0,
+      progressbar_resumetime: 0,
+      expecting_update: true,
+      tick_tock: false,
 
       show_details_modal: false,
       selected_item: {}
@@ -159,6 +165,7 @@ export default {
 
   created() {
     this.item_progress_ms = this.state.item_progress_ms
+    this.visible_progress_ms = this.state.item_progress_ms
     webapi.player_status().then(({ data }) => {
       this.$store.commit(types.UPDATE_PLAYER_STATUS, data)
       if (this.state.state === 'play') {
@@ -174,15 +181,40 @@ export default {
     }
   },
 
+  // tick() is called once per second. The time display should
+  // be updated every time, but it is hard to drag the progress
+  // bar if it is updated too often, so only update it every
+  // second tick. Also, dragging doesn't work well if the
+  // automatic updates intefere with it, so pause updates during
+  // a drag operation.
   methods: {
     tick: function () {
       this.item_progress_ms += 1000
+      if ( this.tick_tock ) {
+        if ( Date.now() > this.progressbar_resumetime ) {
+          this.visible_progress_ms = this.item_progress_ms
+          this.expecting_tick = true
+        }
+      }
+      this.tick_tock = ! this.tick_tock
     },
 
     seek: function (newPosition) {
       webapi.player_seek_to_pos(newPosition).catch(() => {
         this.item_progress_ms = this.state.item_progress_ms
       })
+    },
+
+    // Update is called whenever the slider value changes.
+    // If an update is expected (because tick was called), then
+    // just acknowledge it; otherwise assume that the progress
+    // bar has been dragged, and pause updates for 5 seconds.
+    pause: function () {
+      if ( this.expecting_tick ) {
+        this.expecting_tick = false
+      } else {
+        this.progressbar_resumetime = Date.now() + 5000
+      }
     },
 
     open_dialog: function (item) {
