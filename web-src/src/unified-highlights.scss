@@ -2,6 +2,13 @@ html {
   accent-color: #{$primary};
 }
 
+a {
+    color: #{$primary};  
+}
+a.has-text-link {
+    color: #{$primary} !important;
+}
+
 .navbar.is-light .navbar-brand > a.navbar-item.is-active,
 .navbar.is-light .navbar-brand .navbar-link.is-active
 {
@@ -91,16 +98,11 @@ a.navbar-item.is-active,
   background-color: #{$primary} !important;
 }
 
-/* the following override the "link" color */
-p.title.is-4 > .has-text-link {
-  color: #{$primary} !important;
-}
-.title.is-6.has-text-link {
-  color: #{$primary} !important;
-}
-.subtitle.is-6 > .has-text-link {
-  color: #{$primary} !important;
-}
 .has-text-primary {
   color: #{$primary} !important;
+}
+
+// rescan button
+.has-background-info {
+    background-color: #{$primary} !important;
 }
