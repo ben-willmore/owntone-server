@@ -9,11 +9,11 @@
 
       <template #content>
         <span id="colorscheme_radio">
-        <input type="radio" id="system" name="colorscheme_radio" value="system">
+        <input type="radio" class="fd-radio" id="system" name="colorscheme_radio" value="system">
         <label for="system"> Use system setting</label><br>
-        <input type="radio" id="light" name="colorscheme_radio" value="light">
+        <input type="radio" class="fd-radio" id="light" name="colorscheme_radio" value="light">
         <label for="light"> Light mode</label><br>
-        <input type="radio" id="dark" name="colorscheme_radio" value="dark">
+        <input type="radio" class="fd-radio" id="dark" name="colorscheme_radio" value="dark">
         <label for="dark"> Dark mode</label><br>
         </span>
       </template>
