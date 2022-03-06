@@ -1,3 +1,7 @@
+html {
+  accent-color: #{$primary};
+}
+
 .navbar.is-light .navbar-brand > a.navbar-item.is-active,
 .navbar.is-light .navbar-brand .navbar-link.is-active
 {
