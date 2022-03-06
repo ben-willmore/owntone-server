@@ -106,7 +106,7 @@ html {
   --color-94: #292929;
   --color-95: #e8e8e8;
   --color-96: #{$primary};
-  --color-97: #0c66a1;
+  --color-97: #{$primary}; // unused
   --color-98: #{$primary}; // hero text; I prefer #{$primary};
   --color-99: #000000;
   --color-100: rgba(255, 255, 255, 0.7);
@@ -124,7 +124,7 @@ html {
   --color-112: #292929;
   --color-113: #f5f5f5;
   --color-114: #f5f5f5;
-  --color-115: #0c66a1;
+  --color-115: #{$primary}; // progress bar; I prefer #{$primary}
   --color-116: #{$primary}; // border of active search bar
   --color-117: #0a0a0a; // border of hovered search bar
   --color-118: #d5d5d5; // border of hovered search bar
@@ -303,7 +303,6 @@ html.dark-theme {
 
 
 .fd-progress-bar {
-  background-color: var(--color-97) !important; // doesn't work
   border-radius: 9999px;
   height: 12px;
 }
