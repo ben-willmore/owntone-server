@@ -1,5 +1,6 @@
 html {
   accent-color: #{$primary};
+//  caret-color: #{$primary}; // normal caret color looks better in light mode
 }
 
 a {
@@ -7,6 +8,23 @@ a {
 }
 a.has-text-link {
     color: #{$primary} !important;
+}
+
+.button.is-info {
+    background-color: #{$primary};
+}
+
+.input:focus, .input.is-focused, .input:active, .input.is-active,
+.textarea:focus,
+.textarea.is-focused,
+.textarea:active,
+.textarea.is-active {
+  border-color: #{$primary};
+  box-shadow: 0 0 0 0.125em rgba(94, 163, 228, 0.25);
+}
+
+.tabs.is-toggle li.is-active a {
+    border-color: #636363;
 }
 
 .navbar.is-light .navbar-brand > a.navbar-item.is-active,
