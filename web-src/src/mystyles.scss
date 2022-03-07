@@ -1,7 +1,11 @@
 @charset "utf-8";
 
+// $primary: rgb(227,119,57); // set highlight color here
+
 @import 'bulma/bulma.sass';
 @import 'bulma-switch';
+
+$primary-dark: rgb(227,119,57);
 
 /* Volume slider */
 .slider {
@@ -15,6 +19,12 @@
   --slider-handle-ring-color: #3b82f630;
   --slider-handle-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.32);
   --slider-handle-shadow-active: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.42);
+}
+
+@media screen and (max-width: 1023px) {
+  .slider {
+    --slider-height: 8px;
+  }
 }
 
 /* Now playing progress bar */
@@ -37,10 +47,17 @@
   --slider-handle-ring-width: 3px;
 }
 
-.progress-bar {
-  background-color: $info;
+@media screen and (max-width: 1023px) {
+  .seek-slider {
+    --slider-height: 8px;
+    --slider-handle-width: 20px;
+    --slider-handle-height: 20px;
+  }
+}
+
+.fd-progress-bar {
   border-radius: 9999px;
-  height: 4px;
+  height: 12px;
 }
 
 .media.with-progress h2:last-of-type {
@@ -325,3 +342,9 @@ hr.fd-navbar-divider {
   min-height: 5rem;
 }
 
+.fd-radio {
+    margin: 10px 0px;
+}
+
+@import './css/dark-theme.scss';
+@import './css/unified-highlights.scss';
