@@ -1,0 +1,108 @@
+html {
+  accent-color: #{$primary};
+}
+
+a {
+    color: #{$primary};  
+}
+a.has-text-link {
+    color: #{$primary} !important;
+}
+
+.navbar.is-light .navbar-brand > a.navbar-item.is-active,
+.navbar.is-light .navbar-brand .navbar-link.is-active
+{
+  background-color: #{$primary};
+}
+
+.navbar.is-light .navbar-burger:is-active {
+  background-color: #{$primary};
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar.is-light .navbar-start > a.navbar-item.is-active,
+  .navbar.is-light .navbar-start .navbar-link.is-active,
+  .navbar.is-light .navbar-end > a.navbar-item.is-active,
+  .navbar.is-light .navbar-end .navbar-link.is-active {
+    background-color: #{$primary};
+  }
+
+  .navbar.is-light .navbar-dropdown a.navbar-item.is-active {
+    color: #{$primary} !important;
+  }
+}
+
+.navbar.is-light .navbar-dropdown a.navbar-item.is-active,
+.navbar.is-light .navbar-dropdown a.navbar-item.is-active>b {
+  color: #{$primary};
+}
+
+.navbar.is-dark .navbar-brand > a.navbar-item.is-active,
+.navbar.is-dark .navbar-brand .navbar-link.is-active
+{
+  background-color: #{$primary};
+}
+
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:hover,
+.navbar-link.is-active {
+  color: #{$primary};
+}
+
+.navbar-item:hover {
+  border-bottom-color: #{$primary};
+}
+.navbar-item.is-active {
+  border-bottom-color: #{$primary};
+  color: #{$primary};
+}
+.navbar-link:not(.is-arrowless)::after {
+  border-color: #{$primary};
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar.is-transparent .navbar-dropdown a.navbar-item.is-active {
+    color: #{$primary};
+  }
+}
+
+.pagination-previous:focus,
+.pagination-next:focus,
+.pagination-link:focus {
+  border-color: #{$primary};
+}
+
+.pagination-link.is-current {
+  background-color: #{$primary};
+  border-color: #{$primary};
+}
+
+.panel-list a:hover {
+  color: #{$primary};
+}
+.panel-block.is-active {
+  border-left-color: #{$primary};
+}
+.panel-block.is-active .panel-icon {
+  color: #{$primary};
+}
+.tabs li.is-active a {
+  border-bottom-color: #{$primary};
+  color: #{$primary};
+}
+.tabs.is-toggle li.is-active a {
+  background-color: #{$primary};
+}
+.fd-progress-bar {
+  background-color: #{$primary} !important;
+}
+
+.has-text-primary {
+  color: #{$primary} !important;
+}
+
+// rescan button
+.has-background-info {
+    background-color: #{$primary} !important;
+}
