@@ -61,6 +61,9 @@ html.dark-theme .button {
   border-color: var(--button-bg-hover);
   color: #dbdbdb;
 }
+html.dark-theme .button.is-info {
+    background-color: #{primary-dark};
+}
 html.dark-theme .button:hover,
 html.dark-theme .button.is-hovered {
   border-color: #4a4a4a;
