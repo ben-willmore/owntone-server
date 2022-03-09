@@ -1,6 +1,6 @@
 html {
   accent-color: #{$primary};
-  caret-color: #{$primary};
+//  caret-color: #{$primary}; // black caret looks better in light mode
 }
 
 a {
