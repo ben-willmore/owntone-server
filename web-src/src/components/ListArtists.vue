@@ -28,12 +28,14 @@
       </div>
     </div>
   </template>
-  <modal-dialog-artist
-    :show="show_details_modal"
-    :artist="selected_artist"
-    :media_kind="media_kind"
-    @close="show_details_modal = false"
-  />
+  <teleport to="#app">
+    <modal-dialog-artist
+      :show="show_details_modal"
+      :artist="selected_artist"
+      :media_kind="media_kind"
+      @close="show_details_modal = false"
+    />
+  </teleport>
 </template>
 
 <script>

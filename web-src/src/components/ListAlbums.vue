@@ -47,30 +47,32 @@
       </div>
     </div>
   </template>
-  <modal-dialog-album
-    :show="show_details_modal"
-    :album="selected_album"
-    :media_kind="media_kind"
-    @remove-podcast="open_remove_podcast_dialog()"
-    @play-count-changed="play_count_changed()"
-    @close="show_details_modal = false"
-  />
-  <modal-dialog
-    :show="show_remove_podcast_modal"
-    title="Remove podcast"
-    delete_action="Remove"
-    @close="show_remove_podcast_modal = false"
-    @delete="remove_podcast"
-  >
-    <template #modal-content>
-      <p>Permanently remove this podcast from your library?</p>
-      <p class="is-size-7">
-        (This will also remove the RSS playlist
-        <b>{{ rss_playlist_to_remove.name }}</b
-        >.)
-      </p>
-    </template>
-  </modal-dialog>
+  <teleport to="#app">
+    <modal-dialog-album
+      :show="show_details_modal"
+      :album="selected_album"
+      :media_kind="media_kind"
+      @remove-podcast="open_remove_podcast_dialog()"
+      @play-count-changed="play_count_changed()"
+      @close="show_details_modal = false"
+    />
+    <modal-dialog
+      :show="show_remove_podcast_modal"
+      title="Remove podcast"
+      delete_action="Remove"
+      @close="show_remove_podcast_modal = false"
+      @delete="remove_podcast"
+    >
+      <template #modal-content>
+        <p>Permanently remove this podcast from your library?</p>
+        <p class="is-size-7">
+          (This will also remove the RSS playlist
+          <b>{{ rss_playlist_to_remove.name }}</b
+          >.)
+        </p>
+      </template>
+    </modal-dialog>
+  </teleport>
 </template>
 
 <script>
