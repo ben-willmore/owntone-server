@@ -11,12 +11,12 @@ import App from './App.vue'
 import './mystyles.scss'
 import 'mdi/css/materialdesignicons.css'
 import '@vueform/slider/themes/default.css'
+import './dark-theme-toggle.js'
 
 const app = createApp(App)
   .use(store)
   .use(router)
   .use(VueProgressBar, {
-    color: 'hsl(204, 86%, 53%)',
     failedColor: 'red',
     height: '1px'
   })
