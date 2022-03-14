@@ -13,9 +13,6 @@ $primary-dark: rgb(227,119,57);
   width: 100%;
   margin-top: 16px;
   margin-bottom: 16px;
-  --slider-height: 4px;
-  --slider-connect-bg: hsl(0, 0%, 21%);
-  --slider-tooltip-bg: hsl(0, 0%, 21%);
   --slider-handle-ring-color: #3b82f630;
   --slider-handle-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.32);
   --slider-handle-shadow-active: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.42);
@@ -56,6 +53,7 @@ $primary-dark: rgb(227,119,57);
 }
 
 .fd-progress-bar {
+  background-color: $info;
   border-radius: 9999px;
   height: 12px;
 }
