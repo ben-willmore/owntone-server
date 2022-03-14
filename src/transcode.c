@@ -1288,7 +1288,7 @@ open_filter(struct stream_ctx *out_stream, struct stream_ctx *in_stream)
         {
           if ( (ret = avfilter_link(buffersrc_ctx, 0, format_ctx, 0)) < 0 ||
                (ret = avfilter_link(format_ctx, 0, buffersink_ctx, 0)) < 0 )
-  	    {
+        {
 	      DPRINTF(E_LOG, L_XCODE, "Error connecting audio filters: %s\n", err2str(ret));
 	      goto out_fail;
 	    }
