@@ -14,13 +14,15 @@
         <div class="container has-text-centered">
           <p class="control has-text-centered fd-progress-now-playing">
             <Slider
-              v-model="item_progress_ms"
+              v-model="visible_progress_ms"
               :min="0"
               :max="state.item_length_ms"
               :step="1000"
               :tooltips="false"
               :disabled="state.state === 'stop'"
               :classes="{ target: 'seek-slider' }"
+              :lazy="false"
+              @update="pause"
               @change="seek"
             />
             <!--range-slider
@@ -101,6 +103,8 @@ export default {
     return {
       item_progress_ms: 0,
       interval_id: 0,
+      visible_progress_ms: 0,
+      progressbar_lastupdate: 0,
 
       show_details_modal: false,
       selected_item: {}
@@ -159,6 +163,7 @@ export default {
 
   created() {
     this.item_progress_ms = this.state.item_progress_ms
+    this.visible_progress_ms = this.state.item_progress_ms
     webapi.player_status().then(({ data }) => {
       this.$store.commit(types.UPDATE_PLAYER_STATUS, data)
       if (this.state.state === 'play') {
@@ -174,15 +179,27 @@ export default {
     }
   },
 
+  // Don't update progress bar if update has been called in the
+  // last 900ms, because this suggests a drag is in progress
   methods: {
     tick: function () {
       this.item_progress_ms += 1000
+      if ( Date.now() > this.progressbar_lastupdate + 900 ) {
+        this.visible_progress_ms = this.item_progress_ms
+      }
     },
 
     seek: function (newPosition) {
+      this.item_progress_ms = newPosition
+      this.visible_progress_ms = this.item_progress_ms
       webapi.player_seek_to_pos(newPosition).catch(() => {
         this.item_progress_ms = this.state.item_progress_ms
+        this.visible_progress_ms = this.item_progress_ms
       })
+    },
+
+    pause: function () {
+      this.progressbar_lastupdate = Date.now()
     },
 
     open_dialog: function (item) {
