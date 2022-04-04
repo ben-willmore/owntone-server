@@ -162,7 +162,7 @@ export default {
   },
 
   mounted: function () {
-    console.log(this.$refs.slider)
+    // console.log(this.$refs.slider)
   },
 
   created() {
@@ -190,12 +190,12 @@ export default {
     },
 
     start_dragging: function () {
-      console.log('@start')
+      // console.log('@start')
       this.is_dragged = true
     },
 
     end_dragging: function () {
-      console.log('@end')
+      // console.log('@end')
       this.is_dragged = false
     },
 
