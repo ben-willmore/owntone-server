@@ -24,6 +24,8 @@ $primary-dark: rgb(227,119,57);
 @media screen and (max-width: 1023px) {
   .slider {
     --slider-height: 8px;
+    --slider-handle-width: 20px;
+    --slider-handle-height: 20px;
   }
 }
 
@@ -56,6 +58,7 @@ $primary-dark: rgb(227,119,57);
 }
 
 .fd-progress-bar {
+  background-color: $info;
   border-radius: 9999px;
   height: 12px;
 }
