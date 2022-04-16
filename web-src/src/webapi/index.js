@@ -436,6 +436,10 @@ export default {
     })
   },
 
+  last_notification() {
+    return axios.get('./api/last_notification')
+  },
+
   search(searchParams) {
     return axios.get('./api/search', {
       params: searchParams

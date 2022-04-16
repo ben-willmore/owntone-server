@@ -45,7 +45,7 @@ static bool websocket_exit = false;
 static pthread_mutex_t websocket_write_event_lock;
 // Event mask of events processed by the writeable callback
 static short websocket_write_events;
-static int websocket_event_number = 0;
+int websocket_event_number = 0;
 
 
 /* Thread: library (the thread the event occurred) */

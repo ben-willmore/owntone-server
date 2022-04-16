@@ -26,4 +26,7 @@ websocket_init(void);
 void
 websocket_deinit(void);
 
+int
+websocket_event_number;
+
 #endif /* SRC_WEBSOCKET_H_ */

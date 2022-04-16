@@ -49,7 +49,8 @@ export default {
     return {
       token_timer_id: 0,
       reconnect_attempts: 0,
-      pairing_active: false
+      pairing_active: false,
+      last_notification_received: -1
     }
   },
 
@@ -246,19 +247,15 @@ export default {
           return
         }
 
-        vm.update_outputs()
+        console.log('Updating player status')
         vm.update_player_status()
-        vm.update_library_stats()
-        vm.update_settings()
-        vm.update_queue()
-        vm.update_spotify()
-        vm.update_lastfm()
-        vm.update_pairing()
+
+        vm.check_for_missed_notifications()
 
         update_throttled = true
         setTimeout(function () {
           update_throttled = false
-        }, 500)
+        }, 1000)
       }
 
       // These events are fired when the window becomes active in different ways
@@ -272,6 +269,8 @@ export default {
 
       socket.onmessage = function (response) {
         const data = JSON.parse(response.data)
+        vm.last_notification_received = data.event_number
+        console.log(data)
         if (
           data.notify.includes('update') ||
           data.notify.includes('database')
@@ -315,6 +314,25 @@ export default {
       })
       webapi.library_count('scan_kind is rss').then(({ data }) => {
         this.$store.commit(types.UPDATE_LIBRARY_RSS_COUNT, data)
+      })
+    },
+
+    check_for_missed_notifications: function () {
+      webapi.last_notification().then(({ data }) => {
+
+        console.log(data.last_notification, this.last_notification_received)
+        if (data.last_notification > this.last_notification_received) {
+          console.log('notification(s) missed; updating all info')
+          this.update_outputs()
+          this.update_library_stats()
+          this.update_settings()
+          this.update_queue()
+          this.update_spotify()
+          this.update_lastfm()
+          this.update_pairing()
+          this.last_notification_received = data.last_notification
+        }
+
       })
     },
 

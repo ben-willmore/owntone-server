@@ -55,6 +55,7 @@
 #include "remote_pairing.h"
 #include "settings.h"
 #include "smartpl_query.h"
+#include "websocket.h"
 #ifdef SPOTIFY
 # include "library/spotify_webapi.h"
 # include "inputs/spotify.h"
@@ -4701,6 +4702,23 @@ jsonapi_reply_library_backup(struct httpd_request *hreq)
   return HTTP_OK;
 }
 
+/*
+ * Endpoint /api/last_notification
+ */
+static int
+jsonapi_reply_last_notification(struct httpd_request *hreq)
+{
+  json_object *jreply;
+
+  jreply = json_object_new_object();
+  json_object_object_add(jreply, "last_notification", json_object_new_int(websocket_event_number));
+
+  CHECK_ERRNO(L_WEB, evbuffer_add_printf(hreq->reply, "%s", json_object_to_json_string(jreply)));
+
+  jparse_free(jreply);
+
+  return HTTP_OK;
+}
 
 static struct httpd_uri_map adm_handlers[] =
   {
@@ -4777,6 +4795,8 @@ static struct httpd_uri_map adm_handlers[] =
     { EVHTTP_REQ_GET,    "^/api/library/files$",                         jsonapi_reply_library_files },
     { EVHTTP_REQ_POST,   "^/api/library/add$",                           jsonapi_reply_library_add },
     { EVHTTP_REQ_PUT,    "^/api/library/backup$",                        jsonapi_reply_library_backup },
+
+    { EVHTTP_REQ_GET,    "^/api/last_notification$",                     jsonapi_reply_last_notification },
 
     { EVHTTP_REQ_GET,    "^/api/search$",                                jsonapi_reply_search },
 
